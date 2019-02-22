@@ -6,8 +6,13 @@
 
 #include "timespec.h"
 
+struct stopData {
+  volatile bool stop;
+};
+
 void handler(int sig, siginfo_t *si, void *) {
-  bool *stop = reinterpret_cast<bool *>(si->si_value.sival_ptr);
+  bool *stop = reinterpret_cast<stopData *>(si->si_value.sival_ptr);
+  stop->stop = true;
   return;
 }
 
@@ -25,7 +30,9 @@ unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
 unsigned int run(unsigned int delay_s) {
   unsigned int nLoops(UINT_MAX);
   double counter(0);
-  volatile bool stop(false);
+  struct stopData stop {
+    false
+  };
 
   // Timer
   struct sigaction sa;
@@ -49,7 +56,7 @@ unsigned int run(unsigned int delay_s) {
   // Increment
   timespec start_ts, end_ts{};
   clock_gettime(CLOCK_REALTIME, &start_ts);
-  nLoops = incr(nLoops, &counter, &stop);
+  nLoops = incr(nLoops, &counter, &stop.stop);
   clock_gettime(CLOCK_REALTIME, &end_ts);
   std::cout << "Execution time: " << timespec_to_ms(end_ts - start_ts)
             << "ms (requested " << delay_s << "s)\n";
