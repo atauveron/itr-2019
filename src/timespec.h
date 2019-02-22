@@ -1,3 +1,7 @@
+/* \file timespec.h
+ * \brief Implementations of operations on the Posix data structure timespec
+ */
+
 #ifndef TIMESPEC_INCLUDED
 #define TIMESPEC_INCLUDED
 

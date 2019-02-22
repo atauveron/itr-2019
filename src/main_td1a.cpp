@@ -2,17 +2,15 @@
 #include <ctime>
 #include <iostream>
 
-#include "timespec.h"
-
 void handler(int sig, siginfo_t *si, void *) {
   int *counter = (int *)si->si_value.sival_ptr;
   --(*counter);
   // DEBUG
-  std::cout << "Handler called with value" << *counter << '\n';
+  // std::cout << "Handler called with value " << *counter << '\n';
   return;
 }
 
-void call_timer() {
+int main(int argc, char **argv) {
   int counter(15);
 
   struct sigaction sa;
@@ -39,17 +37,7 @@ void call_timer() {
   timer_settime(tid, 0, &its, nullptr);
   // Wait for the signal
   timer_delete(tid);
-}
 
-int main(int argc, char **argv) {
-  // Question a
-  call_timer();
-  // Question e
-  timespec time1_ts{.tv_sec = 5, .tv_nsec = 0};
-  timespec time2_ts{.tv_sec = 5, .tv_nsec = 500000000};
-  timespec res = timespec_add(time1_ts, time2_ts);
-  std::cout << res.tv_sec << "s, " << res.tv_nsec << "ns\n";
-  std::cout << (time1_ts < time2_ts) << '\n';
-  //
+  // Return
   return 0;
 }
