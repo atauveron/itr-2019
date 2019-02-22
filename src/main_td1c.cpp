@@ -11,7 +11,7 @@ struct stopData {
 };
 
 void handler(int sig, siginfo_t *si, void *) {
-  bool *stop = reinterpret_cast<stopData *>(si->si_value.sival_ptr);
+  stopData *stop = reinterpret_cast<stopData *>(si->si_value.sival_ptr);
   stop->stop = true;
   return;
 }
@@ -27,12 +27,10 @@ unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
   return i;
 }
 
-unsigned int run(unsigned int delay_s) {
+unsigned int run(long int delay_s) {
   unsigned int nLoops(UINT_MAX);
   double counter(0);
-  struct stopData stop {
-    false
-  };
+  stopData stop{false};
 
   // Timer
   struct sigaction sa;
@@ -58,9 +56,11 @@ unsigned int run(unsigned int delay_s) {
   clock_gettime(CLOCK_REALTIME, &start_ts);
   nLoops = incr(nLoops, &counter, &stop.stop);
   clock_gettime(CLOCK_REALTIME, &end_ts);
+
+  // DEBUG
   std::cout << "Execution time: " << timespec_to_ms(end_ts - start_ts)
             << "ms (requested " << delay_s << "s)\n";
-
+  std::cout << "Number of loops: " << nLoops << '\n';
   // Delete timer
   timer_delete(tid);
 
@@ -75,9 +75,9 @@ int main(int argc, char **argv) {
   unsigned int nLoops6 = run(6);
 
   // Output
-  auto slope = (nLoops6 - nLoops4) / 2;
-  auto offset = nLoops4 - 4 * slope;
-  std::cout << "l(t)= " << slope << " * x + " << offset << '\n';
+  long int slope = (nLoops6 - nLoops4) / 2;
+  long int offset = (long int)nLoops4 - 4 * slope;
+  std::cout << "l(t)= " << slope << " * t + " << offset << '\n';
 
   // Return
   return 0;
