@@ -5,7 +5,7 @@
 #include "timespec.h"
 
 void incr(unsigned int nLoops, double *pCounter) {
-  for (auto i(0); i < nLoops; ++i) {
+  for (unsigned int i(0); i < nLoops; ++i) {
     (*pCounter) += 1.0;
   }
   return;

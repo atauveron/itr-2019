@@ -3,7 +3,7 @@
 #include <iostream>
 
 void handler(int sig, siginfo_t *si, void *) {
-  int *counter = (int *)si->si_value.sival_ptr;
+  int *counter = reinterpret_cast<int *>(si->si_value.sival_ptr);
   --(*counter);
   // DEBUG
   // std::cout << "Handler called with value " << *counter << '\n';
