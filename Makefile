@@ -16,19 +16,19 @@ BDIR=	bin
 _BIN= a.out
 BIN= $(patsubst %,$(BDIR)/%,$(_BIN))
 
-CMP= g++
-# CMP= arm-linux-gnueabihf-g++
+# CMP= g++
+CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
 OPT= -g -Wall -fbounds-check
 LIB= -lrt
 
 all: obj bin $(BIN)
 
 $(BIN): $(OBJ) $(DEP)
-	$(CMP) $(OPT) $(LIB) -o $@ $(OBJ)
+	$(CMP) $(OPT) -o $@ $(OBJ) $(LIB)
 	@echo Build successful
 
 $(OBJ): $(ODIR)/%.o: $(SDIR)/%.cpp $(DEP)
-	$(CMP) $(OPT) $(LIB) -o $@ -c $<
+	$(CMP) $(OPT) -o $@ -c $< $(LIB)
 
 obj:
 	@mkdir -p $(ODIR)
