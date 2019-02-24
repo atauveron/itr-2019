@@ -1,3 +1,9 @@
+/**
+ * @file main_td1e.cpp
+ * @brief Main file for tutorial question 1e
+ * Most of the work for this question is in files `timespec.h` and
+ * `timespec.cpp`.
+ */
 #include <ctime>
 #include <iostream>
 

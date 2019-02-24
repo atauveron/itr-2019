@@ -1,3 +1,8 @@
+/**
+ * @file main_td1c.cpp
+ * @brief Main file for tutorial question 1c
+ */
+
 #include <ctime>
 #include <iostream>
 #include <pthread.h>
@@ -6,11 +11,22 @@
 
 #include "timespec.h"
 
-struct Data {
+/**
+ * @brief A structure to share data between threads
+ */
+struct ThreadData {
+  /// The number of loops to perform
   volatile unsigned int nLoops;
+  /// A pointer to the counter
   volatile double *pCounter;
 };
 
+/**
+ * @brief A function to increment a counter
+ * 
+ * @param nLoops the number of loops to perform
+ * @param[in,out] pCounter a pointer to the counter to increment
+ */
 void incr(unsigned int nLoops, volatile double *pCounter) {
   for (unsigned int i(0); i < nLoops; ++i) {
     (*pCounter) += 1.0;
@@ -18,8 +34,13 @@ void incr(unsigned int nLoops, volatile double *pCounter) {
   return;
 }
 
+/**
+ * @brief A wrapper to call `incr` in a pthread
+ * 
+ * @param v_data[in,out] a pointer to the data passed to the thread
+ */
 void *call_incr(void *v_data) {
-  Data *p_data = reinterpret_cast<Data *>(v_data);
+  ThreadData *p_data = reinterpret_cast<ThreadData *>(v_data);
   incr(p_data->nLoops, p_data->pCounter);
   return v_data;
 }
@@ -34,7 +55,7 @@ int main(int argc, char **argv) {
   double counter(0);
 
   // Thread
-  Data data{nLoops, &counter};
+  ThreadData data{nLoops, &counter};
   std::vector<pthread_t> incrementThreads(nTasks);
 
   // Time

@@ -1,7 +1,18 @@
+/**
+ * @file main_td1a.cpp
+ * @brief Main file for tutorial question 1a
+ */
 #include <csignal>
 #include <ctime>
 #include <iostream>
 
+/**
+ * @brief A handler function for the timer
+ * This function decrements the value of the integer counter passed via @p si.
+ * 
+ * @param sig
+ * @param si
+ */
 void handler(int sig, siginfo_t *si, void *) {
   int *counter = reinterpret_cast<int *>(si->si_value.sival_ptr);
   --(*counter);

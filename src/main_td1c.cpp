@@ -1,3 +1,7 @@
+/**
+ * @file main_td1c.cpp
+ * @brief Main file for tutorial question 1c
+ */
 #include <climits>
 #include <csignal>
 #include <ctime>
@@ -6,16 +10,36 @@
 
 #include "timespec.h"
 
-struct stopData {
+/**
+ * @brief A structure to wrap the data sent to the timer
+ */
+struct StopData {
+  /// A boolean indicating whether incrementation of the counter should stop
   volatile bool stop;
 };
 
+/**
+ * @brief A handler function for the timer
+ * This function sets the boolean in structure of type StopData (passed via @p
+ * si) to false.
+ *
+ * @param sig
+ * @param si
+ */
 void handler(int sig, siginfo_t *si, void *) {
-  stopData *stop = reinterpret_cast<stopData *>(si->si_value.sival_ptr);
+  StopData *stop = reinterpret_cast<StopData *>(si->si_value.sival_ptr);
   stop->stop = true;
   return;
 }
 
+/**
+ * @brief A function that increments a counter
+ *
+ * @param nLoops the maximum number of loops to perform
+ * @param[in,out] pCounter a pointer to the counter to increment
+ * @param[in] pStop a boolean to stop the function early
+ * @return the number of loops performed
+ */
 unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
   unsigned int i;
   for (i = 0; i < nLoops; ++i) {
@@ -27,10 +51,16 @@ unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
   return i;
 }
 
+/**
+ * @brief A wrapper function to run `incr` for a specified duration
+ *
+ * @param delay_s the duration for which to run `incr` (in seconds)
+ * @return the number of loops performed by `incr`
+ */
 unsigned int run(long int delay_s) {
   unsigned int nLoops(UINT_MAX);
   double counter(0);
-  stopData stop{false};
+  StopData stop{false};
 
   // Timer
   struct sigaction sa;

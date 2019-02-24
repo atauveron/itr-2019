@@ -1,9 +1,19 @@
+/**
+ * @file main_td1b.cpp
+ * @brief Main file for tutorial question 1b
+ */
 #include <ctime>
 #include <iostream>
 #include <string>
 
 #include "timespec.h"
 
+/**
+ * @brief A function to increment a counter
+ * 
+ * @param nLoops the number of loops to perform
+ * @param[in,out] pCounter a pointer to the counter to increment
+ */
 void incr(unsigned int nLoops, double *pCounter) {
   for (unsigned int i(0); i < nLoops; ++i) {
     (*pCounter) += 1.0;
