@@ -18,7 +18,7 @@ BIN= $(patsubst %,$(BDIR)/%,$(_BIN))
 
 # CMP= g++
 CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
-OPT= -g -Wall -fbounds-check
+OPT= -std=c++11 -g -Wall -fbounds-check
 LIB= -lrt -pthread
 
 all: obj bin $(BIN)
