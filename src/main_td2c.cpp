@@ -3,6 +3,7 @@
  * @brief Main file for tutorial question 1c
  */
 
+#include <cstring>
 #include <ctime>
 #include <iostream>
 #include <pthread.h>
@@ -63,10 +64,9 @@ int main(int argc, char **argv) {
   }
   unsigned int nLoops = std::stoul(argv[1]);
   unsigned int nTasks = std::stoul(argv[2]);
-  bool useMutex(false);
-  if (argc == 4 && argv[3] == "protected") {
-    useMutex = true;
-  }
+  // Set useMutex to true if the third argument is "protected", and to false
+  // otherwise.
+  bool useMutex(argc == 4 && !strcmp(argv[3], "protected"));
 
   // Thread
   ThreadData data{nLoops, 0, useMutex};
