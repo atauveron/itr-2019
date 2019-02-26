@@ -1,6 +1,6 @@
 /**
  * @file Timer.h
- * @brief Implementations of the Timer class
+ * @brief Implementation of the Timer class
  */
 
 #ifndef TIMER_INCLUDED
