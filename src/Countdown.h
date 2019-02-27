@@ -19,7 +19,7 @@ private:
 public:
   Countdown(int n);
 
-private:
+protected:
   void callback();
 };
 
