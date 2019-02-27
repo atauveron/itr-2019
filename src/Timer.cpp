@@ -1,3 +1,5 @@
+#include <ctime>
+#include <csignal>
 #include "Timer.h"
 
 Timer::Timer() : {

@@ -6,8 +6,7 @@
 #ifndef COUNTDOWN_INCLUDED
 #define COUNTDOWN_INCLUDED
 
-#include <ctime>
-#include <csignal>
+#include "PeriodicTimer.h"
 
 /**
  * @brief A class that implements a countdown

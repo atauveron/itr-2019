@@ -6,8 +6,7 @@
 #ifndef PERIODIC_TIMER_INCLUDED
 #define PERIODIC_TIMER_INCLUDED
 
-#include <ctime>
-#include <csignal>
+#include "Timer.h"
 
 /**
  * @brief A class that implements a periodic timer
