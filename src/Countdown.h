@@ -17,10 +17,10 @@ private:
   int counter;
 
 public:
-  Countdown(int n)
+  Countdown(int n);
 
 private:
-  void callback()
+  void callback();
 };
 
 #endif
