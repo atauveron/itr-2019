@@ -19,8 +19,8 @@ protected:
 public:
   Timer();
   ~Timer();
-  void start(double duration_ms);
   void stop();
+  virtual void start(double duration_ms);
 
 protected:
   virtual void callback() = delete;
