@@ -13,23 +13,23 @@
  */
 class PosixThread {
 
-public:
-	// TODO: UML WTF ???
-	// class Exception
+	public:
+		// TODO: UML WTF ???
+		// class Exception
 
-private:
-	pthread_t posixId;
-	pthread_attr_t posixAttr;
+	private:
+		pthread_t posixId;
+		pthread_attr_t posixAttr;
 
-public:
-	PosixThread();
-	PosixThread(pthread_t posixId);
-	~PosixThread();
-	void start(void* (*threadFunc) (void*), void* threadArg);
-	void join();
-	bool join(double timeout_ms);
-	bool setScheduling(int schedPolicy, int priority);
-	bool getScheduling(int* p_schedPolicy=nullptr, int* p_priority=nullptr);
+	public:
+		PosixThread();
+		PosixThread(pthread_t posixId);
+		~PosixThread();
+		void start(void* (*threadFunc) (void*), void* threadArg);
+		void join();
+		bool join(double timeout_ms);
+		bool setScheduling(int schedPolicy, int priority);
+		bool getScheduling(int* p_schedPolicy=nullptr, int* p_priority=nullptr);
 };
 
 #endif
