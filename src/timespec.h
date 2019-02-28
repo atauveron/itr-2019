@@ -86,7 +86,7 @@ timespec timespec_wait(const timespec &delay_ts);
  * @return a timespec structure (opposite of @p time_ts)
  */
 inline timespec operator-(const timespec &time_ts) {
-  return timespec_negate(time_ts);
+	return timespec_negate(time_ts);
 }
 
 /**
@@ -99,7 +99,7 @@ inline timespec operator-(const timespec &time_ts) {
  * @return a timespec structure (@p time1_ts + @p time2_ts)
  */
 inline timespec operator+(const timespec &time1_ts, const timespec &time2_ts) {
-  return timespec_add(time1_ts, time2_ts);
+	return timespec_add(time1_ts, time2_ts);
 }
 
 /**
@@ -112,7 +112,7 @@ inline timespec operator+(const timespec &time1_ts, const timespec &time2_ts) {
  * @return a timespec structure (@p time1_ts - @p time2_ts)
  */
 inline timespec operator-(const timespec &time1_ts, const timespec &time2_ts) {
-  return timespec_subtract(time1_ts, time2_ts);
+	return timespec_subtract(time1_ts, time2_ts);
 }
 
 /**
@@ -127,8 +127,8 @@ inline timespec operator-(const timespec &time1_ts, const timespec &time2_ts) {
  * @return the incremented timespec structure @p time_ts
  */
 inline timespec &operator+=(timespec &time_ts, const timespec &delay_ts) {
-  time_ts = timespec_add(time_ts, delay_ts);
-  return time_ts;
+	time_ts = timespec_add(time_ts, delay_ts);
+	return time_ts;
 }
 
 /**
@@ -143,8 +143,8 @@ inline timespec &operator+=(timespec &time_ts, const timespec &delay_ts) {
  * @return the decremented timespec structure @p time_ts
  */
 inline timespec &operator-=(timespec &time_ts, const timespec &delay_ts) {
-  time_ts = timespec_subtract(time_ts, delay_ts);
-  return time_ts;
+	time_ts = timespec_subtract(time_ts, delay_ts);
+	return time_ts;
 }
 
 /**
@@ -157,8 +157,8 @@ inline timespec &operator-=(timespec &time_ts, const timespec &delay_ts) {
  * @return a boolean indicating whether the two values are equal
  */
 inline bool operator==(const timespec &time1_ts, const timespec &time2_ts) {
-  return time1_ts.tv_sec == time2_ts.tv_sec && time1_ts.tv_nsec &&
-         time2_ts.tv_nsec;
+	return time1_ts.tv_sec == time2_ts.tv_sec && time1_ts.tv_nsec &&
+				 time2_ts.tv_nsec;
 }
 
 /**
@@ -171,7 +171,7 @@ inline bool operator==(const timespec &time1_ts, const timespec &time2_ts) {
  * @return a boolean indicating whether the two values are different
  */
 inline bool operator!=(const timespec &time1_ts, const timespec &time2_ts) {
-  return !(time1_ts == time2_ts);
+	return !(time1_ts == time2_ts);
 }
 
 /**
@@ -184,7 +184,7 @@ inline bool operator!=(const timespec &time1_ts, const timespec &time2_ts) {
  * @return a boolean indicating whether @p time1_ts < @p time2_ts
  */
 inline bool operator<(const timespec &time1_ts, const timespec &time2_ts) {
-  return (time1_ts - time2_ts).tv_sec < 0;
+	return (time1_ts - time2_ts).tv_sec < 0;
 }
 
 /**
@@ -197,7 +197,7 @@ inline bool operator<(const timespec &time1_ts, const timespec &time2_ts) {
  * @return a boolean indicating whether @p time1_ts > @p time2_ts
  */
 inline bool operator>(const timespec &time1_ts, const timespec &time2_ts) {
-  return (time1_ts - time2_ts).tv_sec > 0;
+	return (time1_ts - time2_ts).tv_sec > 0;
 }
 
 #endif

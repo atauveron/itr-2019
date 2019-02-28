@@ -14,8 +14,8 @@
 class CpuLoop {
 
 public:
-  CpuLoop(Calibrator *calibrator);
-  void runTime(double duration_ms);
+	CpuLoop(Calibrator *calibrator);
+	void runTime(double duration_ms);
 };
 
 #endif

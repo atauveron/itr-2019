@@ -14,15 +14,15 @@
 class Calibrator : PeriodicTimer {
 
 private:
-  double a;
-  double b;
+	double a;
+	double b;
 
 public:
-  Calibrator(double samplingPeriod_ms, unsigned nSamples);
-  double nLoops(double duration_ms);
+	Calibrator(double samplingPeriod_ms, unsigned nSamples);
+	double nLoops(double duration_ms);
 
 protected:
-  void callback();
+	void callback();
 };
 
 #endif

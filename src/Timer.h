@@ -14,19 +14,19 @@
  */
 class Timer {
 protected:
-  timer_t tid;
+	timer_t tid;
 
 public:
-  Timer();
-  ~Timer();
-  void stop();
-  virtual void start(double duration_ms);
+	Timer();
+	~Timer();
+	void stop();
+	virtual void start(double duration_ms);
 
 protected:
-  virtual void callback() = delete;
+	virtual void callback() = 0;
 
 private:
-  static void call_callback(int sig, siginfo_t *si, void *user);
+	static void call_callback(int sig, siginfo_t *si, void *user);
 };
 
 #endif

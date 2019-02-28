@@ -2,13 +2,13 @@
 #include "PeriodicTimer.h"
 
 Countdown::Countdown(int n) : PeriodicTimer() {
-    counter = n;
+	counter = n;
 }
 
-void Countdown::callback() : {
-    --counter;
+void Countdown::callback() {
+	--counter;
 
-    if (counter == 0) {
-        this.stop();
-    }
+	if (counter == 0) {
+		this->stop();
+	}
 }

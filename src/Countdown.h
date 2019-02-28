@@ -11,16 +11,16 @@
 /**
  * @brief A class that implements a countdown
  */
-class Countdown : PeriodicTimer {
+class Countdown : public PeriodicTimer {
 
 private:
-  int counter;
+	int counter;
 
 public:
-  Countdown(int n);
+	Countdown(int n);
 
 protected:
-  void callback();
+	void callback();
 };
 
 #endif

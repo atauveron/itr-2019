@@ -11,10 +11,10 @@
 /**
  * @brief A class that implements a periodic timer
  */
-class PeriodicTimer : Timer {
+class PeriodicTimer : public Timer {
 
 public:
-  void start(double duration_ms);
+	void start(double duration_ms);
 };
 
 #endif
