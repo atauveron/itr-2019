@@ -8,8 +8,6 @@
 
 #include <ctime>
 
-#include "timespec.h"
-
 /**
  * @brief A class that implements a chronometer
  */

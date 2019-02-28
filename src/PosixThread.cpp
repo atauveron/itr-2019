@@ -1,9 +1,10 @@
-#include <pthread.h>
+#include "PosixThread.h"
+
 #include <cerrno>
 #include <stdexcept>
-#include <time.h>
+#include <ctime>
+
 #include "timespec.h"
-#include "PosixThread.h"
 
 PosixThread::PosixThread() {
 	pthread_attr_init(&posixAttr);

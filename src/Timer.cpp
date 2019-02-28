@@ -1,7 +1,7 @@
+#include "Timer.h"
+
 #include <ctime>
 #include <csignal>
-#include <signal.h>
-#include "Timer.h"
 
 Timer::Timer() {
 	struct sigaction sa;

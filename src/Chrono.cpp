@@ -1,5 +1,7 @@
 #include "Chrono.h"
 
+#include "timespec.h"
+
 Chrono::Chrono() : startTime_(timespec_now()), stopTime_(startTime_) {}
 
 void Chrono::stop() { stopTime_ = timespec_now(); }

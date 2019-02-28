@@ -1,5 +1,7 @@
 #include "PeriodicTimer.h"
-#include <time.h>
+
+#include <ctime>
+
 #include "timespec.h"
 
 void PeriodicTimer::start(double duration_ms) {

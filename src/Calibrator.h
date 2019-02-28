@@ -1,5 +1,5 @@
 /**
- * @file Calibartor.h
+ * @file Calibrator.h
  * @brief Implementation of the Calibrator class
  */
 
