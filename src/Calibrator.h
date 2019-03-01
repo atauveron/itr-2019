@@ -20,6 +20,7 @@ class Calibrator : PeriodicTimer {
 private:
   double a;
   double b;
+  unsigned counter;
   Looper *looper = nullptr;
   std::vector<double> samples;
 
