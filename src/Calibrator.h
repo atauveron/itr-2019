@@ -6,6 +6,10 @@
 #ifndef CALIBRATOR_INCLUDED
 #define CALIBRATOR_INCLUDED
 
+#include <array>
+#include <vector>
+
+#include "Looper.h"
 #include "PeriodicTimer.h"
 
 /**
@@ -14,15 +18,17 @@
 class Calibrator : PeriodicTimer {
 
 private:
-	double a;
-	double b;
+  double a;
+  double b;
+  Looper *looper = nullptr;
+  std::vector<double> samples;
 
 public:
-	Calibrator(double samplingPeriod_ms, unsigned nSamples);
-	double nLoops(double duration_ms);
+  Calibrator(double samplingPeriod_ms, unsigned nSamples);
+  double nLoops(double duration_ms);
 
 protected:
-	void callback();
+  void callback();
 };
 
 #endif

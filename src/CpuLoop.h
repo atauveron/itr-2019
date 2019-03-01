@@ -7,14 +7,17 @@
 #define CPULOOP_INCLUDED
 
 #include "Calibrator.h"
+#include "Looper.h"
 
 /**
- * @brief A class that implements a cpu Loop
+ * @brief A class that implements a CPU Loop
  */
-class CpuLoop {
+class CpuLoop : public Looper {
+private:
+	Calibrator &calibrator;
 
 public:
-	CpuLoop(Calibrator *calibrator);
+	CpuLoop(Calibrator &calibrator_);
 	void runTime(double duration_ms);
 };
 

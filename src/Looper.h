@@ -6,7 +6,7 @@
 #ifndef LOOPER_INCLUDED
 #define LOOPER_INCLUDED
 
-#include <cfloat>
+#include <limits>
 
 /**
  * @brief A class that implements a Looper system
@@ -14,11 +14,11 @@
 class Looper {
 
 private:
-	bool doStop;
-	double iLoop;
+	volatile bool doStop = false;
+	double iLoop = 0;
 
 public:
-	double runLoops(double nLoops=DBL_MAX);
+	double runLoops(double nLoops = std::numeric_limits<double>::max());
 	double getSamples();
 	double stopLoop();
 };
