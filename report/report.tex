@@ -1,0 +1,57 @@
+\documentclass[a4paper,oneside,11pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Gestion des marges
+\usepackage{geometry}
+\geometry{hmargin=2.5cm, top=2.5cm, bottom=2.5cm}
+\usepackage{setspace}
+\onehalfspacing
+
+% Mathématiques
+\usepackage{mathtools,amssymb,amsthm}
+
+% Références
+\usepackage{hyperref}
+
+% Code
+\usepackage{listings}
+\lstset{breaklines=true}
+
+% Images
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Gestion des en-têtes
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{15pt}
+\fancyhead[L]{\bfseries ITR}
+\fancyhead[R]{E~\textsc{de~Roffignac}, A~\textsc{Tauveron}}
+\fancyfoot[C]{\thepage{}}
+\renewcommand{\headrulewidth}{.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\title{ITR\\Report}
+\author{Edmond~\textsc{de Roffignac}, Aimery~\textsc{Tauveron-\,-Jalenques}}
+\date{22 janvier 2019}
+
+\begin{document}
+\maketitle
+
+\section*{TD1}
+
+\paragraph{Question 1a} Done (\texttt{main\_td1a.cpp}).
+
+\paragraph{Question 1a} Done (\texttt{main\_td2a.cpp}). The final value of the counter is ???.
+
+\paragraph{Question 1e} The code is in files \texttt{timespec.h} and \texttt{timespec.cpp}. Some basic tests are implemented in \texttt{main\_td1e.cpp}.
+
+
+\end{document}
