@@ -45,13 +45,29 @@
 \begin{document}
 \maketitle
 
-\section*{TD1}
 
+\section*{TD1}
 \paragraph{Question 1a} Done (\texttt{main\_td1a.cpp}).
 
-\paragraph{Question 1a} Done (\texttt{main\_td2a.cpp}). The final value of the counter is ???.
+\paragraph{Question 1b} Done (\texttt{main\_td1b.cpp}). The final value of the counter is the value passed as argument (and stored in variable \texttt{nLoops}).
+
+\paragraph{Question 1c} Done (\texttt{main\_td1c.cpp}). When passing argument \texttt{pStop} to function \texttt{incr}, it must be declared as volatile.
+
+\paragraph{Question 1d} A first solution for increasing the precision of $l$ would be to record more points, and then perform a linear regression on these data points (for example, using the least-squares methods\footnote{\href{https://en.wikipedia.org/wiki/Linear_least_squares}{en.wikipedia.org/wiki/Linear\_least\_squares}}).
 
 \paragraph{Question 1e} The code is in files \texttt{timespec.h} and \texttt{timespec.cpp}. Some basic tests are implemented in \texttt{main\_td1e.cpp}.
+
+
+\section*{TD2}
+\paragraph{Question 1a} Done (\texttt{main\_td2a.cpp}). Executing the program with high values for \texttt{nLoops} and \texttt{nTasks}, we notice that the final value of the counter is less than the product $\texttt{nLoops}\cdot\texttt{nTasks}$. For small values, this is not the case. We conclude that there are concurrent accesses to the counter variable. This means that in some cases:
+\begin{itemize}
+  \item  one thread may reads the variable (its value is $i$),
+  \item a second thread reads the variable (its value is still $i$),
+  \item the first thread sets the variable to $i+1$,
+  \item the second thread sets the variable to $i+1$ (again).
+\end{itemize}
+
+Note that an incrementation operation may never be atomic since it involves both a read and a write operation (sequentially).
 
 
 \end{document}
