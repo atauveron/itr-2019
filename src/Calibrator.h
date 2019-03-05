@@ -18,18 +18,34 @@
 class Calibrator : PeriodicTimer {
 
 private:
-  double a;
-  double b;
-  unsigned counter;
-  Looper *looper = nullptr;
-  std::vector<double> samples;
+	double a;
+	double b;
+	unsigned counter;
+	Looper *looper = nullptr;
+	std::vector<double> samples;
 
 public:
-  Calibrator(double samplingPeriod_ms, unsigned nSamples);
-  double nLoops(double duration_ms);
+	/**
+	 * @brief Constructor
+	 * 
+	 * @param samplingPeriod_ms the sampling period for calibration (in ms)
+	 * @param nSamples the number of samples to use for calibration
+	 */
+	Calibrator(double samplingPeriod_ms, unsigned nSamples);
+	/**
+	 * @brief Convert a duration to a number of loops
+	 * This method uses the data obtained when constructing the calibrator.
+	 * 
+	 * @param duration_ms the duration to convert (in ms)
+	 * @return the number of loops
+	 */
+	double nLoops(double duration_ms);
 
 protected:
-  void callback();
+	/**
+	 * @brief The callback for the timer (used for calibration)
+	 */
+	void callback();
 };
 
 #endif

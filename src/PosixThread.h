@@ -72,8 +72,8 @@ public:
 	/**
 	 * @brief Get the scheduling policy of the thread
 	 * 
-	 * @param schedPolicy the current scheduling policy for the thread
-	 * @param priority the current priority of the thread
+	 * @param[out] p_schedPolicy the current scheduling policy for the thread
+	 * @param[out] p_priority the current priority of the thread
 	 * @return `true` if the operation succeeds, `false` otherwise
 	 */
 	bool getScheduling(int *p_schedPolicy = nullptr, int *p_priority = nullptr);

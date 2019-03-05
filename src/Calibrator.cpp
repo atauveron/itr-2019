@@ -11,7 +11,7 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned nSamples)
 	thread.start(looper->runLoops, NULL);
 	start(samplingPeriod_ms);
 	thread.join();
-	
+
 	looper = nullptr;
 
 	// TODO Generalize to nSamples > 2
@@ -23,10 +23,10 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned nSamples)
 
 double Calibrator::nLoops(double duration_ms) { return a * duration_ms + b; }
 
-void Calibrator::callback() { 
+void Calibrator::callback() {
 	--counter;
 
-	if (counter==0) {
+	if (counter == 0) {
 		samples.push_back(looper->stopLoop());
 		stop();
 	} else {
