@@ -1,12 +1,15 @@
 #include "Countdown.h"
-#include "PeriodicTimer.h"
+#include <iostream>
 
-Countdown::Countdown(int n) : PeriodicTimer(), counter(n) {}
+Countdown::Countdown(int n) : counter(n) {}
 
 void Countdown::callback() {
 	--counter;
 
+	std::cout << counter << std::endl;
+
 	if (counter == 0) {
-		this->stop();
+		stop();
+		std::cout << "counter stopped" << std::endl;
 	}
 }

@@ -8,11 +8,12 @@ Thread::~Thread() {}
 
 void Thread::start() { call_run(this); }
 
+// DOES NOT USE A THREAD !!!!
 void *Thread::call_run(void *v_thread) {
   Thread *thread = reinterpret_cast<Thread *>(v_thread);
   thread->chrono.restart();
   thread->run();
-  thread->join();
+  thread->join(); /// NOTHING TO JOIN
   thread->chrono.stop;
 }
 
