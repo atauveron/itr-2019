@@ -22,12 +22,12 @@ private:
 	double b;
 	unsigned counter;
 	Looper *looper = nullptr;
-	std::vector<double> samples;
+	std::vector<double> samples{};
 
 public:
 	/**
 	 * @brief Constructor
-	 * 
+	 *
 	 * @param samplingPeriod_ms the sampling period for calibration (in ms)
 	 * @param nSamples the number of samples to use for calibration
 	 */
@@ -35,7 +35,7 @@ public:
 	/**
 	 * @brief Convert a duration to a number of loops
 	 * This method uses the data obtained when constructing the calibrator.
-	 * 
+	 *
 	 * @param duration_ms the duration to convert (in ms)
 	 * @return the number of loops
 	 */

@@ -8,7 +8,7 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned nSamples)
 	looper = &localLooper;
 	PosixThread thread{};
 
-	thread.start(looper->runLoops, NULL);
+	thread.start(looper->runLoops, nullptr);
 	start(samplingPeriod_ms);
 	thread.join();
 
