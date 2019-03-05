@@ -1,6 +1,6 @@
 /**
- * @file main_td1c.cpp
- * @brief Main file for tutorial question 1c
+ * @file main_td2c.cpp
+ * @brief Main file for tutorial question 2c
  */
 
 #include <cstring>
