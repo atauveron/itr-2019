@@ -6,23 +6,43 @@
 #ifndef TIMER_INCLUDED
 #define TIMER_INCLUDED
 
-#include <ctime>
 #include <csignal>
+#include <ctime>
 
 /**
  * @brief A class that implements a timer
  */
 class Timer {
 protected:
+	/**
+	 * @brief The underlying Posix timer
+	 */
 	timer_t tid;
 
 public:
+	/**
+	 * @brief Default constructor
+	 */
 	Timer();
+	/**
+	 * @brief Default destructor
+	 */
 	~Timer();
+	/**
+	 * @brief Stop the timer
+	 */
 	void stop();
+	/**
+	 * @brief Start the timer
+	 *
+	 * @param duration_ms the timer delay (in ms)
+	 */
 	virtual void start(double duration_ms);
 
 protected:
+	/**
+	 * @brief The timer callback
+	 */
 	virtual void callback() = 0;
 
 private:
