@@ -3,8 +3,28 @@
 
 SDIR= src
 _SRC= timespec.cpp \
+	Calibrator.cpp \
+	Chrono.cpp \
+	Countdown.cpp \
+	CpuLoop.cpp \
+	Looper.cpp \
+	Timer.cpp \
+	PeriodicTimer.cpp \
+	PosixThread.cpp \
+	Thread.cpp \
+	Mutex.cpp \
 	main.cpp
-_DEP=	timespec.h
+_DEP=	timespec.h \
+	Calibrator.h \
+	Chrono.h \
+	Countdown.h \
+	CpuLoop.h \
+	Looper.h \
+	Timer.h \
+	PeriodicTimer.h \
+	PosixThread.h \
+	Thread.h \
+	Mutex.h
 SRC= $(patsubst %,$(SDIR)/%,$(_SRC))
 DEP= $(patsubst %,$(SDIR)/%,$(_DEP))
 
