@@ -15,6 +15,9 @@ class Mutex {
 
 	public:
 		class Lock {
+			private:
+				Mutex &mtx;
+
 			public:
 				Lock(Mutex &m);
 				Lock(Mutex &m, double timeout_ms);
@@ -37,7 +40,7 @@ class Mutex {
 		void lock();
 		bool lock(double timeout_ms);
 		bool trylock();
-		bool unlock();
+		void unlock();
 };
 
 #endif
