@@ -27,7 +27,7 @@ public:
 	/**
 	 * @brief Default destructor
 	 */
-	~Timer();
+	virtual ~Timer();
 	/**
 	 * @brief Stop the timer
 	 */
@@ -37,7 +37,7 @@ public:
 	 *
 	 * @param duration_ms the timer delay (in ms)
 	 */
-	virtual void start(double duration_ms);
+	virtual void start(double duration_ms) = 0;
 
 protected:
 	/**
