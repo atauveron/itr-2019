@@ -32,9 +32,29 @@ public:
 	 */
 	~Thread();
 	void start();
+	/**
+	 * @brief Get the start time of the thread
+	 *
+	 * @return the start time of the thread (converted to ms)
+	 */
 	double startTime_ms();
+	/**
+	 * @brief Get the stop time of the thread
+	 *
+	 * @return the stop time of the thread (converted to ms)
+	 */
 	double stopTime_ms();
+	/**
+	 * @brief Get the execution time of the thread
+	 *
+	 * @return the execution time of the thread (in ms)
+	 */
 	double execTime_ms();
+	/**
+	 * @brief Pause the thread for a specified time
+	 *
+	 * @param delay_ms the duration for which to pause the thread
+	 */
 	static void sleep_ms(double delay_ms);
 
 protected:

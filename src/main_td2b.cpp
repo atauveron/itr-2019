@@ -38,7 +38,7 @@ void incr(unsigned int nLoops, volatile double *pCounter) {
 /**
  * @brief A wrapper to call `incr` in a pthread
  *
- * @param v_data[in,out] a pointer to the data passed to the thread
+ * @param[in,out] v_data a pointer to the data passed to the thread
  */
 void *call_incr(void *v_data) {
 	ThreadData *p_data = reinterpret_cast<ThreadData *>(v_data);

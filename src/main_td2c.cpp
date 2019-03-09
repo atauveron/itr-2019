@@ -31,9 +31,11 @@ struct ThreadData {
  *
  * @param nLoops the number of loops to perform
  * @param[in,out] pCounter a pointer to the counter to increment
+ * @param useMutex a boolean to indicate whether to use a mutex
+ * @param pMutex a pointer to the mutex to use
  */
-void incr(unsigned int nLoops, volatile double *pCounter, bool useMutex,
-					pthread_mutex_t *pMutex) {
+void incr(unsigned int nLoops, volatile double *pCounter, bool useMutex = false,
+					pthread_mutex_t *pMutex = nullptr) {
 	for (unsigned int i(0); i < nLoops; ++i) {
 		if (useMutex) {
 			pthread_mutex_lock(pMutex);
@@ -49,7 +51,7 @@ void incr(unsigned int nLoops, volatile double *pCounter, bool useMutex,
 /**
  * @brief A wrapper to call `incr` in a pthread
  *
- * @param v_data[in,out] a pointer to the data passed to the thread
+ * @param[in,out] v_data a pointer to the data passed to the thread
  */
 void *call_incr(void *v_data) {
 	ThreadData *p_data = reinterpret_cast<ThreadData *>(v_data);
