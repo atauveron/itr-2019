@@ -94,7 +94,7 @@ template <typename T> T Fifo<T>::pop(double timeout_ms) {
 	if (elements.size() > 0) {
 		return elements.pop();
 	} else {
-		throw new Fifo<T>::EmptyException();
+		throw Fifo<T>::EmptyException();
 	}
 }
 

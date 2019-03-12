@@ -33,6 +33,8 @@ Mutex::Lock::Lock(Mutex &m, double timeout_ms) : mtx(m) {
 	int retval = mtx.lock(timeout_ms);
 	if (retval != 0) {
 		// TODO create Timeout Exception
+		// Done
+		throw Mutex::Lock::TimeoutException();
 	}
 }
 
@@ -48,3 +50,15 @@ bool Mutex::Lock::wait(double timeout_ms) {
 void Mutex::Lock::notify() { pthread_cond_signal(&mtx.posixCondId); }
 
 void Mutex::Lock::notifyAll() { pthread_cond_broadcast(&mtx.posixCondId); }
+
+Mutex::Lock::Lock(Mutex &m, bool &status) {
+	// TODO
+}
+
+const char *Mutex::Lock::TimeoutException::what() const noexcept {
+	return "Timed out while trying to acquire lock";
+}
+
+Mutex::TryLock::TryLock(Mutex &m) : Mutex::Lock::Lock(m, success) {}
+
+Mutex::TryLock::~TryLock() {}

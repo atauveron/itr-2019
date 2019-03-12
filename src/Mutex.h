@@ -6,6 +6,7 @@
 #ifndef MUTEX_INCLUDED
 #define MUTEX_INCLUDED
 
+#include <exception>
 #include <pthread.h>
 
 /**
@@ -51,6 +52,42 @@ public:
 		bool wait(double timeout_ms);
 		void notify();
 		void notifyAll();
+
+	protected:
+		/**
+		 * @brief A constructor to be used by the TryLock child class
+		 *
+		 * @param m the mutex to lock (passed by reference)
+		 * @param[out] whether or not the attempt to lock succeeded
+		 */
+		Lock(Mutex &m, bool &status);
+
+	public:
+		class TimeoutException : std::exception {
+		public:
+			const char *what() const noexcept;
+		};
+	};
+
+	/**
+	 * @brief A class to implement the try-lock functionality for the Mutex class
+	 */
+	class TryLock : public Lock {
+	private:
+		/**
+		 * @brief Whether the lock operation succeeded
+		 */
+		bool success;
+
+	public:
+		/**
+		 * @brief Constructor
+		 */
+		TryLock(Mutex &m);
+		/**
+		 * @brief Destructor
+		 */
+		~TryLock();
 	};
 
 private:
@@ -83,11 +120,11 @@ private:
 	 */
 	bool lock(double timeout_ms);
 	/**
-	 * Method to try to acquire the mutex (for use by Lock nested class)
+	 * Method to try to acquire the mutex (for use by TryLock nested class)
 	 */
 	bool trylock();
 	/**
-	 * Method to release the mutex (for use by Lock nested class)
+	 * Method to release the mutex (for use by Lock and TryLock nested class)
 	 */
 	void unlock();
 };
