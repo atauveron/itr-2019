@@ -46,6 +46,18 @@ protected:
 	 * @brief The callback for the timer (used for calibration)
 	 */
 	void callback();
+
+private:
+	/**
+	 * @brief A function that performs a linear regression to find 
+	 * linear coefficient
+	 *
+	 * @param x Array of x-axis values
+	 * @param x Array of y-axis values
+	 * @param N Size of the arrays
+	 * @return The slope `a` and the offset `b`
+	 */
+	long int* regressionError(std::vector<double> Y, unsigned N, double dx);
 };
 
 #endif
