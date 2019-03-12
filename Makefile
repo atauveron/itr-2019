@@ -13,7 +13,7 @@ _SRC= timespec.cpp \
 	PosixThread.cpp \
 	Thread.cpp \
 	Mutex.cpp \
-	Semaphore.cpp
+	Semaphore.cpp \
 	main.cpp
 _DEP=	timespec.h \
 	Calibrator.h \
