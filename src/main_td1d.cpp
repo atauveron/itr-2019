@@ -99,34 +99,78 @@ unsigned int run(long int delay_s) {
 }
 
 /**
- * @brief A function that run 2 iterations of `run` for 4 and 6 seconds
- * to find the linear coefficient
+ * @brief A function that run several iterations of `run` 
+ * to find the linear coefficient through linear regression
  *
+ * @param N The number of points wanted
  * @return The coefficients `a` & `b` for the linear relation
  */
-long int* calib() {
+long int* calib(int N) {
 	long int params[2];
 
-	// Run for 4 then 6 seconds
-	unsigned int nLoops4 = run(4);
-	unsigned int nLoops6 = run(6);
+	unsigned int x[N];
+	unsigned int y[N];
 
-	// Compute parameters
-	long int slope = (nLoops6 - nLoops4) / 2;
-	long int offset = (long int)nLoops4 - 4 * slope;
+	// Run for a N test
+	for (int i = 0; i < N; ++i) {
+		x[i] = run(i);
+		y[i] = run(i);
+	}
 
-	params[0] = slope;
-	params[1] = offset;
+	// Compute parameters from Mean Sqaure Error
+	long int* params = regressionError(x, y, N);
 
 	// Return
 	return params;
+}
+
+/**
+ * @brief A function that performs a linear regression to find 
+ * linear coefficient
+ *
+ * @param x Array of x-axis values
+ * @param x Array of y-axis values
+ * @param N Size of the arrays
+ * @return The slope `a` and the offset `b`
+ */
+long int* regressionError(unsigned int* X, unsigned int* Y,int N)
+{
+	long int xMean = 0;
+	long int yMean = 0;
+	long int xyError = 0;
+	long int squareXError = 0;
+
+	long int values[2];
+
+	// Compute Mean
+	for (int i = 0; i < N ; ++i) {
+		xMean += X[i];
+		yMean += Y[i];
+	}
+
+	xMean /= N;
+	yMean /= N;
+
+	// Compute Mean Square Error and XY Error to deduce slope
+	for (int i = 0; i < N ; ++i) {
+		xyError += (xMean - X[i]) * (yMean - Y[i]);
+		squareXError += (xMean - X[i]) * (xMean - X[i]);
+	}
+
+	long int slope = xyError / squareXError;
+	long int offset = yMean - slope * xMean;
+	values[0] = slope;
+	values[1] = offset;
+
+	// Return
+	return values;
 }
 
 int main(int argc, char **argv) {
 
 	// Start calibration
 	std::cout << "============== START CALIBRATION ==============" << '\n';
-	long int* calib_params = calib();
+	long int* calib_params = calib(20);
 	long int a = calib_params[0];
 	long int b = calib_params[1];
 	std::cout << "l(t)= " << a << " * t + " << b << '\n';
