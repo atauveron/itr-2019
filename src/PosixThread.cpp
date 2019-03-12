@@ -47,8 +47,8 @@ void PosixThread::start(void *(*threadFunc)(void *), void *threadArg) {
 void PosixThread::join() { pthread_join(posixId, NULL); }
 
 bool PosixThread::join(double timeout_ms) {
-	const timespec ts = timespec_from_ms(timeout_ms);
-	return !(bool)pthread_timedjoin_np(posixId, NULL, &ts);
+	const timespec tspec(timespec_from_ms(timeout_ms));
+	return !(bool)pthread_timedjoin_np(posixId, NULL, &tspec);
 }
 
 bool PosixThread::setScheduling(int schedPolicy, int priority) {
