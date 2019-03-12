@@ -13,6 +13,7 @@ _SRC= timespec.cpp \
 	PosixThread.cpp \
 	Thread.cpp \
 	Mutex.cpp \
+	Semaphore.cpp
 	main.cpp
 _DEP=	timespec.h \
 	Calibrator.h \
@@ -24,7 +25,9 @@ _DEP=	timespec.h \
 	PeriodicTimer.h \
 	PosixThread.h \
 	Thread.h \
-	Mutex.h
+	Mutex.h \
+	Semaphore.h \
+	Fifo.h
 SRC= $(patsubst %,$(SDIR)/%,$(_SRC))
 DEP= $(patsubst %,$(SDIR)/%,$(_DEP))
 
