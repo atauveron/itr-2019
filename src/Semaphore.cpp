@@ -1,8 +1,6 @@
 #include "Semaphore.h"
 
-Semaphore::Semaphore(
-		unsigned int initCount = 0,
-		unsigned int maxCount = std::numeric_limits<unsigned int>::max())
+Semaphore::Semaphore(unsigned int initCount, unsigned int maxCount)
 		: counter(initCount <= maxCount ? initCount : maxCount),
 			maxCounter(maxCount), mtx() {}
 
