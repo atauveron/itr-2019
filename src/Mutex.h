@@ -88,6 +88,11 @@ public:
 		 * @brief Destructor
 		 */
 		~TryLock();
+		
+		class TryLockException : std::exception {
+		public:
+			const char *what() const noexcept;
+		};
 	};
 
 private:

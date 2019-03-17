@@ -51,14 +51,20 @@ void Mutex::Lock::notify() { pthread_cond_signal(&mtx.posixCondId); }
 
 void Mutex::Lock::notifyAll() { pthread_cond_broadcast(&mtx.posixCondId); }
 
-Mutex::Lock::Lock(Mutex &m, bool &status) {
-	// TODO
-}
+Mutex::Lock::Lock(Mutex &m, bool &status) : mtx(m) { status = m.lock(0); }
 
 const char *Mutex::Lock::TimeoutException::what() const noexcept {
 	return "Timed out while trying to acquire lock";
 }
 
-Mutex::TryLock::TryLock(Mutex &m) : Mutex::Lock::Lock(m, success) {}
+Mutex::TryLock::TryLock(Mutex &m) : Mutex::Lock::Lock(m, success) {
+	if (!success) {
+		throw Mutex::TryLock::TryLockException();
+	}
+}
 
-Mutex::TryLock::~TryLock() {}
+Mutex::TryLock::~TryLock() { mtx.unlock() }
+
+const char *Mutex::TryLock::TryLockException::what() const noexcept {
+	return "Could not acquire lock";
+}
