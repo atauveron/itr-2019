@@ -22,7 +22,6 @@ public:
 	void* call_loop(void* v_data);
 	double getSamples();
 	double stopLoop();
-	void loop();
 };
 
 #endif
