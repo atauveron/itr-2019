@@ -1,9 +1,26 @@
+#include <functional>
 #include <iostream>
 #include <numeric>
 #include <thread>
 #include <vector>
 
 #include "Semaphore.h"
+
+void consTask(Semaphore &semaphore, unsigned int &n) {
+	bool success(true);
+	while (success) {
+		success = semaphore.take(1000); // 1 second timeout
+		if (success) {
+			++n;
+		}
+	}
+}
+
+void prodTask(Semaphore &semaphore, unsigned int nTokens) {
+	for (unsigned int k = 0; k < nTokens; ++k) {
+		semaphore.give();
+	}
+}
 
 int main(int argc, char **argv) {
 	if (argc < 3) {
@@ -22,26 +39,11 @@ int main(int argc, char **argv) {
 	std::vector<unsigned int> nTaken(nCons, 0);
 	std::vector<std::thread> prodThreads{};
 	for (unsigned int k = 0; k < nCons; ++k) {
-		consThreads.push_back(std::thread(
-				[](Semaphore &sem, unsigned int &n) {
-					bool success(true);
-					while (success) {
-						success = sem.take(1000); // 1 second timeout
-						if (success) {
-							++n;
-						}
-					}
-				},
-				std::ref(semaphore), std::ref(nTaken.at(k))));
+		consThreads.push_back(
+				std::thread(consTask, std::ref(semaphore), std::ref(nTaken.at(k))));
 	}
 	for (unsigned int k = 0; k < nProd; ++k) {
-		prodThreads.push_back(std::thread(
-				[&nTokens](Semaphore &sem) {
-					for (unsigned int k = 0; k < nTokens; ++k) {
-						sem.give();
-					}
-				},
-				std::ref(semaphore)));
+		prodThreads.push_back(std::thread(prodTask, std::ref(semaphore), nTokens));
 	}
 
 	// Join the threads
