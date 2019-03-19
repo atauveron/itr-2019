@@ -26,7 +26,7 @@ struct StopData {
  * @param sig
  * @param si
  */
-void handler(int sig, siginfo_t *si, void *) {
+void handler(int, siginfo_t *si, void *) {
 	StopData *stop = reinterpret_cast<StopData *>(si->si_value.sival_ptr);
 	stop->stop = true;
 	return;
@@ -104,8 +104,8 @@ unsigned int run(long int delay_s) {
  *
  * @return The coefficients `a` & `b` for the linear relation
  */
-long int* calib() {
-	long int params[2];
+void calib(long int* params) {
+	
 
 	// Run for 4 then 6 seconds
 	unsigned int nLoops4 = run(4);
@@ -119,14 +119,16 @@ long int* calib() {
 	params[1] = offset;
 
 	// Return
-	return params;
+	return;
 }
 
-int main(int argc, char **argv) {
+int main() {
+
+	long int calib_params[2];
 
 	// Start calibration
 	std::cout << "============== START CALIBRATION ==============" << '\n';
-	long int* calib_params = calib();
+	calib(calib_params);
 	long int a = calib_params[0];
 	long int b = calib_params[1];
 	std::cout << "l(t)= " << a << " * t + " << b << '\n';
