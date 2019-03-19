@@ -19,9 +19,10 @@ private:
 
 public:
 	double runLoops(double nLoops = std::numeric_limits<double>::max());
-	double runLoops();
+	void* call_loop(void* v_data);
 	double getSamples();
 	double stopLoop();
+	void loop();
 };
 
 #endif

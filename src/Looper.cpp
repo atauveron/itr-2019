@@ -11,8 +11,8 @@ double Looper::runLoops(double nLoops) {
 	return iLoop;
 }
 
-double Looper::runLoops() {
-	Looper::runLoops(std::numeric_limits<double>::max());
+void* Looper::call_loop(void* v_data) {
+	this->runLoops();
 }
 
 double Looper::getSamples() { return iLoop; }

@@ -1,5 +1,4 @@
 #include "Calibrator.h"
-
 #include <pthread.h>
 
 Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
@@ -9,7 +8,7 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
 
 	pthread_t posixId;
 
-	pthread_create(&posixId, nullptr, looper->runLoops, nullptr);
+	pthread_create(&posixId, nullptr, looper->loop, nullptr);
 	start(samplingPeriod_ms);
 	pthread_join(posixId, NULL);
 
