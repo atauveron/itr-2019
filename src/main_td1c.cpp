@@ -102,7 +102,7 @@ unsigned int run(long int delay_s) {
  * @brief A function that run 2 iterations of `run` for 4 and 6 seconds
  * to find the linear coefficient
  *
- * @return The coefficients `a` & `b` for the linear relation
+ * @param params The coefficients `a` & `b` for the linear relation
  */
 void calib(long int* params) {
 	
