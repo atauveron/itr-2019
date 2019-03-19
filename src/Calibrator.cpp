@@ -14,14 +14,14 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
 
 	looper = nullptr;
 
-	long int* values = regressionError(samples, nSamples, samplingPeriod_ms);
+	long int* values = Calibrator::regressionError(samples, nSamples, samplingPeriod_ms);
 	// TODO Generalize to nSamples > 2
 	// TODO Create a private method to compute
 	a = values[0];
 	b = values[1];
 }
 
-long int* regressionError(std::vector<double> Y, unsigned N, double dx)
+long int* Calibrator::regressionError(std::vector<double> Y, unsigned N, double dx)
 {
 	long int xMean = dx*(N+1)/2;
 	long int yMean = 0;
