@@ -2,7 +2,7 @@
 
 #include "PosixThread.h"
 
-Calibrator::Calibrator(double samplingPeriod_ms, unsigned nSamples)
+Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
 		: samples({}), counter(nSamples) {
 	Looper localLooper{};
 	looper = &localLooper;

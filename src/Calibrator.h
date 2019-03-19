@@ -31,7 +31,7 @@ public:
 	 * @param samplingPeriod_ms the sampling period for calibration (in ms)
 	 * @param nSamples the number of samples to use for calibration
 	 */
-	Calibrator(double samplingPeriod_ms, unsigned nSamples);
+	Calibrator(double samplingPeriod_ms, unsigned int nSamples);
 	/**
 	 * @brief Convert a duration to a number of loops
 	 * This method uses the data obtained when constructing the calibrator.
