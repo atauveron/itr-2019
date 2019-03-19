@@ -2,7 +2,7 @@
 
 #include "PosixThread.h"
 
-Calibrator::Calibrator(double samplingPeriod_ms, unsigned nSamples)
+Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
 		: samples({}), counter(nSamples) {
 	Looper localLooper{};
 	looper = &localLooper;
@@ -14,11 +14,42 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned nSamples)
 
 	looper = nullptr;
 
+	long int values[2];
+
+	Calibrator::regressionError(values, samples, nSamples, samplingPeriod_ms);
 	// TODO Generalize to nSamples > 2
 	// TODO Create a private method to compute
-	a = (samples[1] - samples[0]) / samplingPeriod_ms;
-	b = (samples[1] + samples[0]) - a * (3 * samplingPeriod_ms);
-	b /= 2;
+	a = values[0];
+	b = values[1];
+}
+
+void Calibrator::regressionError(long int* values, std::vector<double> Y, unsigned N, double dx)
+{
+	long int xMean = dx*(N+1)/2;
+	long int yMean = 0;
+	long int xyError = 0;
+	long int squareXError = 0;
+
+	// Compute Mean
+	for (int i = 0; i < N ; ++i) {
+		yMean += Y[i];
+	}
+
+	yMean /= N;
+
+	// Compute Mean Square Error and XY Error to deduce slope
+	for (int i = 0; i < N ; ++i) {
+		xyError += (xMean - (i+1)*dx) * (yMean - Y[i]);
+		squareXError += (xMean - (i+1)*dx) * (xMean - (i+1)*dx);
+	}
+
+	long int slope = xyError / squareXError;
+	long int offset = yMean - slope * xMean;
+	values[0] = slope;
+	values[1] = offset;
+
+	// Return
+	return;
 }
 
 double Calibrator::nLoops(double duration_ms) { return a * duration_ms + b; }

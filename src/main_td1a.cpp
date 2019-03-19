@@ -13,7 +13,7 @@
  * @param sig
  * @param si
  */
-void handler(int sig, siginfo_t *si, void *) {
+void handler(int, siginfo_t *si, void *) {
 	int *counter = reinterpret_cast<int *>(si->si_value.sival_ptr);
 	--(*counter);
 	// DEBUG
@@ -21,7 +21,7 @@ void handler(int sig, siginfo_t *si, void *) {
 	return;
 }
 
-int main(int argc, char **argv) {
+int main() {
 	int counter(15);
 
 	struct sigaction sa;

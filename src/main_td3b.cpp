@@ -2,7 +2,7 @@
 
 #include <unistd.h>
 
-int main(int argc, char **argv) {
+int main() {
 	Countdown countdown(10);
 	countdown.start(1000);
 

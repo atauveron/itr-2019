@@ -19,6 +19,47 @@ struct StopData {
 };
 
 /**
+ * @brief A function that performs a linear regression to find 
+ * linear coefficient
+ *
+ * @param values The slope `a` and the offset `b`
+ * @param x Array of x-axis values
+ * @param x Array of y-axis values
+ * @param N Size of the arrays
+ */
+void regressionError(long int* values, unsigned int* X, unsigned int* Y, int N)
+{
+	long int xMean = 0;
+	long int yMean = 0;
+	long int xyError = 0;
+	long int squareXError = 0;
+
+	// Compute Mean
+	for (int i = 0; i < N ; ++i) {
+		xMean += X[i];
+		yMean += Y[i];
+	}
+
+	xMean /= N;
+	yMean /= N;
+
+	// Compute Mean Square Error and XY Error to deduce slope
+	for (int i = 0; i < N ; ++i) {
+		xyError += (xMean - X[i]) * (yMean - Y[i]);
+		squareXError += (xMean - X[i]) * (xMean - X[i]);
+	}
+
+	long int slope = xyError / squareXError;
+	long int offset = yMean - slope * xMean;
+	values[0] = slope;
+	values[1] = offset;
+
+	// Return
+	return;
+}
+
+
+/**
  * @brief A handler function for the timer
  * This function sets the boolean in structure of type StopData (passed via @p
  * si) to false.
@@ -99,24 +140,25 @@ unsigned int run(long int delay_s) {
 }
 
 /**
- * @brief A function that run 2 iterations of `run` for 4 and 6 seconds
- * to find the linear coefficient
- *
- * @param params The coefficients `a` & `b` for the linear relation
+ * @brief A function that run several iterations of `run` 
+ * to find the linear coefficient through linear regression
+ * 
+ * @param params  The coefficients `a` & `b` for the linear relation
+ * @param N The number of points wanted
  */
-void calib(long int* params) {
-	
+void calib(long int *params, int N) {
 
-	// Run for 4 then 6 seconds
-	unsigned int nLoops4 = run(4);
-	unsigned int nLoops6 = run(6);
+	unsigned int x[N];
+	unsigned int y[N];
 
-	// Compute parameters
-	long int slope = (nLoops6 - nLoops4) / 2;
-	long int offset = (long int)nLoops4 - 4 * slope;
+	// Run for a N test
+	for (int i = 1; i <= N; ++i) {
+		x[i] = i;
+		y[i] = run(i);
+	}
 
-	params[0] = slope;
-	params[1] = offset;
+	// Compute parameters from Mean Sqaure Error
+	regressionError(params, x, y, N);
 
 	// Return
 	return;
@@ -128,7 +170,7 @@ int main() {
 
 	// Start calibration
 	std::cout << "============== START CALIBRATION ==============" << '\n';
-	calib(calib_params);
+	calib(calib_params, 10);
 	long int a = calib_params[0];
 	long int b = calib_params[1];
 	std::cout << "l(t)= " << a << " * t + " << b << '\n';
