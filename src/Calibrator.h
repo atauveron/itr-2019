@@ -22,7 +22,7 @@ private:
 	double b;
 	Looper *looper = nullptr;
 	std::vector<double> samples{};
-	unsigned counter;
+	unsigned int counter;
 
 public:
 	/**
