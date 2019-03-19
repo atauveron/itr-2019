@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 	bool useMutex(argc == 4 && !strcmp(argv[3], "protected"));
 
 	// Thread
-	ThreadData data{nLoops, 0, useMutex};
+	ThreadData data{nLoops, 0, useMutex, 0};
 	pthread_mutex_init(&data.mutex, nullptr);
 	std::vector<pthread_t> incrementThreads(nTasks);
 
