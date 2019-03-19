@@ -152,7 +152,7 @@ void calib(long int *params, int N) {
 	unsigned int y[N];
 
 	// Run for a N test
-	for (int i = 0; i < N; ++i) {
+	for (int i = i; i <= N; ++i) {
 		x[i] = run(i);
 		y[i] = run(i);
 	}
