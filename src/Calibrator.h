@@ -32,6 +32,7 @@ public:
 	 * @param nSamples the number of samples to use for calibration
 	 */
 	Calibrator(double samplingPeriod_ms, unsigned int nSamples);
+
 	/**
 	 * @brief Convert a duration to a number of loops
 	 * This method uses the data obtained when constructing the calibrator.
@@ -52,12 +53,12 @@ private:
 	 * @brief A function that performs a linear regression to find 
 	 * linear coefficient
 	 *
+	 * @param values The slope `a` and the offset `b`
 	 * @param x Array of x-axis values
 	 * @param x Array of y-axis values
 	 * @param N Size of the arrays
-	 * @return The slope `a` and the offset `b`
 	 */
-	long int* regressionError(std::vector<double> Y, unsigned N, double dx);
+	 void regressionError(long int* values, std::vector<double> Y, unsigned N, double dx);
 };
 
 #endif
