@@ -12,7 +12,8 @@ double Looper::runLoops(double nLoops) {
 }
 
 void* Looper::call_loop(void* v_data) {
-	this->runLoops();
+	Looper* loop = reinterpret_cast<Looper *>(v_data);
+	loop->runLoops();
 }
 
 double Looper::getSamples() { return iLoop; }

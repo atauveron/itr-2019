@@ -8,7 +8,7 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
 
 	pthread_t posixId;
 
-	pthread_create(&posixId, nullptr, looper->call_loop, nullptr);
+	pthread_create(&posixId, nullptr, looper->call_loop, looper);
 	start(samplingPeriod_ms);
 	pthread_join(posixId, NULL);
 
