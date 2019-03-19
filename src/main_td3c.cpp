@@ -1,8 +1,9 @@
 #include "CpuLoop.h"
 #include "Chrono.h"
+#include "Calibrator.h"
 #include <iostream>
 
-int main (int argc, char **argv) {
+int main () {
   Calibrator callibrator(1000,2);
   CpuLoop loop(callibrator);
   

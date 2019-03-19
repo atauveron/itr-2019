@@ -8,7 +8,7 @@
 
 #include "Chrono.h"
 
-int main(int argc, char **argv) {
+int main() {
 	Chrono chrono;
 
 	sleep(1);
