@@ -11,6 +11,10 @@ double Looper::runLoops(double nLoops) {
 	return iLoop;
 }
 
+double Looper::runLoops() {
+	Looper::runLoops(std::numeric_limits<double>::max());
+}
+
 double Looper::getSamples() { return iLoop; }
 
 double Looper::stopLoop() {

@@ -31,14 +31,14 @@ void Calibrator::regressionError(long int* values, std::vector<double> Y, unsign
 	long int squareXError = 0;
 
 	// Compute Mean
-	for (int i = 0; i < N ; ++i) {
+	for (unsigned int i = 0; i < N ; ++i) {
 		yMean += Y[i];
 	}
 
 	yMean /= N;
 
 	// Compute Mean Square Error and XY Error to deduce slope
-	for (int i = 0; i < N ; ++i) {
+	for (unsigned int i = 0; i < N ; ++i) {
 		xyError += (xMean - (i+1)*dx) * (yMean - Y[i]);
 		squareXError += (xMean - (i+1)*dx) * (xMean - (i+1)*dx);
 	}
