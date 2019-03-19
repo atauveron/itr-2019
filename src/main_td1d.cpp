@@ -153,7 +153,7 @@ void calib(long int *params, int N) {
 
 	// Run for a N test
 	for (int i = 1; i <= N; ++i) {
-		x[i] = run(i);
+		x[i] = i;
 		y[i] = run(i);
 	}
 
@@ -170,7 +170,7 @@ int main() {
 
 	// Start calibration
 	std::cout << "============== START CALIBRATION ==============" << '\n';
-	calib(calib_params, 20);
+	calib(calib_params, 10);
 	long int a = calib_params[0];
 	long int b = calib_params[1];
 	std::cout << "l(t)= " << a << " * t + " << b << '\n';
