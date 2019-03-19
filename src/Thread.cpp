@@ -15,6 +15,8 @@ void *Thread::call_run(void *v_thread) {
 	thread->run();
 	thread->join(); // NOTHING TO JOIN
 	thread->chrono.stop();
+
+	return;
 }
 
 void sleep_ms(double delay_ms) { timespec_wait(timespec_from_ms(delay_ms)); }
