@@ -1,24 +1,24 @@
 #include "Calibrator.h"
 
-#include "PosixThread.h"
+#include <pthread.h>
 
 Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
 		: samples({}), counter(nSamples) {
 	Looper localLooper{};
 	looper = &localLooper;
-	PosixThread thread{};
 
-	thread.start(looper->runLoops, nullptr);
+	pthread_t posixId;
+
+	pthread_create(&posixId, nullptr, looper->runLoops, nullptr);
 	start(samplingPeriod_ms);
-	thread.join();
+	pthread_join(posixId, NULL);
 
 	looper = nullptr;
 
 	long int values[2];
 
 	Calibrator::regressionError(values, samples, nSamples, samplingPeriod_ms);
-	// TODO Generalize to nSamples > 2
-	// TODO Create a private method to compute
+
 	a = values[0];
 	b = values[1];
 }
