@@ -13,6 +13,8 @@ void *Thread::call_run(void *v_thread) {
     thread->chrono.restart();
     thread->run();
     thread->chrono.stop();
+
+    return nullptr;
 }
 
 void Thread::sleep_ms(double delay_ms) {
