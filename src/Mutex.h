@@ -56,7 +56,8 @@ private:
 	 */
 	void lock();
 	/**
-	 * @brief Method to acquire the mutex with timeout (for use by Lock nested class)
+	 * @brief Method to acquire the mutex with timeout (for use by Lock nested
+	 * class)
 	 */
 	bool lock(double timeout_ms);
 	/**
@@ -64,7 +65,8 @@ private:
 	 */
 	bool trylock();
 	/**
-	 * @brief Method to release the mutex (for use by Lock and TryLock nested class)
+	 * @brief Method to release the mutex (for use by Lock and TryLock nested
+	 * class)
 	 */
 	void unlock();
 };
@@ -99,9 +101,30 @@ public:
 	 * @brief Destructor (release the mutex)
 	 */
 	~Lock();
+
+	/**
+	 * @brief Wait for a signal before continuing
+	 * The lock on the mutex is temporarily released while the thread waits.
+	 */
 	void wait();
+	/**
+	 * @brief Wait for a signal before continuing (with timeout)
+	 * The lock on the mutex is temporarily released while the thread waits.
+	 *
+	 * @param timeout_ms the maximum time to wait (in miliseconds) before
+	 * continuing
+	 * @return whether the wait succeeded or timed out
+	 */
 	bool wait(double timeout_ms);
+	/**
+	 * @brief Send a signal (to one thread only)
+	 * This signal will be received by a thread that is currently waiting.
+	 */
 	void notify();
+	/**
+	 * @brief Send a signal to all threads
+	 * This signal will be received by all threads that are currently waiting.
+	 */
 	void notifyAll();
 
 protected:
@@ -109,7 +132,7 @@ protected:
 	 * @brief A constructor to be used by the TryLock child class
 	 *
 	 * @param m the mutex to lock (passed by reference)
-	 * @param[out] whether or not the attempt to lock succeeded
+	 * @param[out] status whether or not the attempt to lock succeeded
 	 */
 	Lock(Mutex &m, bool &status);
 
@@ -119,6 +142,9 @@ public:
 	 */
 	class TimeoutException : std::exception {
 	public:
+		/**
+		 * @brief Return a character string describing the error
+		 */
 		const char *what() const noexcept;
 	};
 };
@@ -148,6 +174,9 @@ public:
 	 */
 	class TryLockException : std::exception {
 	public:
+		/**
+		 * @brief Return a character string describing the error
+		 */
 		const char *what() const noexcept;
 	};
 };

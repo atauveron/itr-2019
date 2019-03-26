@@ -37,6 +37,9 @@ public:
 	 */
 	class EmptyException : std::exception {
 	public:
+		/**
+		 * @brief Return a character string describing the error
+		 */
 		const char *what() const noexcept;
 	};
 
