@@ -86,7 +86,9 @@ template <typename T> T Fifo<T>::pop() {
 	while (elements.size() == 0) {
 		lck.wait();
 	}
-	return elements.pop();
+	T element = elements.front();
+	elements.pop();
+	return element;
 }
 
 template <typename T> T Fifo<T>::pop(double timeout_ms) {
@@ -95,7 +97,9 @@ template <typename T> T Fifo<T>::pop(double timeout_ms) {
 		lck.wait(timeout_ms);
 	}
 	if (elements.size() > 0) {
-		return elements.pop();
+		T element = elements.front();
+		elements.pop();
+		return element;
 	} else {
 		throw Fifo<T>::EmptyException();
 	}
