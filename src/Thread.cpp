@@ -6,18 +6,18 @@ Thread::Thread() : chrono() {}
 
 Thread::~Thread() {}
 
-void Thread::start() { call_run(this); }
+void Thread::start() { PosixThread::start(call_run, this); }
 
-// DOES NOT USE A THREAD !!!!
 void *Thread::call_run(void *v_thread) {
-	Thread *thread = reinterpret_cast<Thread *>(v_thread);
-	thread->chrono.restart();
-	thread->run();
-	thread->join(); // NOTHING TO JOIN
-	thread->chrono.stop();
+    Thread *thread = reinterpret_cast<Thread *>(v_thread);
+    thread->chrono.restart();
+    thread->run();
+    thread->chrono.stop();
 }
 
-void Thread::sleep_ms(double delay_ms) { timespec_wait(timespec_from_ms(delay_ms)); }
+void Thread::sleep_ms(double delay_ms) {
+    timespec_wait(timespec_from_ms(delay_ms));
+}
 
 double Thread::startTime_ms() { return chrono.startTime(); }
 
