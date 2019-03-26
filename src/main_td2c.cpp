@@ -64,11 +64,11 @@ int main(int argc, char **argv) {
 		std::cerr << "Usage: " << argv[0] << " <nLoops> <nTasks> [protected]\n";
 		return 1;
 	}
-	unsigned int nLoops = std::stoul(argv[1]);
-	unsigned int nTasks = std::stoul(argv[2]);
+	const unsigned int nLoops = std::stoul(argv[1]);
+	const unsigned int nTasks = std::stoul(argv[2]);
 	// Set useMutex to true if the third argument is "protected", and to false
 	// otherwise.
-	bool useMutex(argc == 4 && !strcmp(argv[3], "protected"));
+	const bool useMutex(argc == 4 && !strcmp(argv[3], "protected"));
 
 	// Thread
 	ThreadData data{nLoops, 0, useMutex};
@@ -86,6 +86,11 @@ int main(int argc, char **argv) {
 	}
 	pthread_mutex_destroy(&data.mutex);
 	clock_gettime(CLOCK_REALTIME, &end_ts);
+	if (useMutex) {
+		std::cout << "Using a mutex\n";
+	} else {
+		std::cout << "Not using a mutex\n";
+	}
 	std::cout << "Execution time: " << timespec_to_ms(end_ts - start_ts) / 1000
 						<< "s\n";
 	std::cout << "Counter: " << data.counter << '\n';

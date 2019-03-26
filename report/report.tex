@@ -59,7 +59,7 @@
 
 
 \section*{TD2}
-\paragraph{Question 1a} Done (\texttt{main\_td2a.cpp}). Executing the program with high values for \texttt{nLoops} and \texttt{nTasks}, we notice that the final value of the counter is less than the product $\texttt{nLoops}\cdot\texttt{nTasks}$. For small values, this is not the case. We conclude that there are concurrent accesses to the counter variable. This means that in some cases:
+\paragraph{Question 2a} Done (\texttt{main\_td2a.cpp}). Executing the program with high values for \texttt{nLoops} and \texttt{nTasks}, we notice that the final value of the counter is less than the product $\texttt{nLoops}\cdot\texttt{nTasks}$. For small values, this is not the case. We conclude that there are concurrent accesses to the counter variable. This means that in some cases:
 \begin{itemize}
   \item  one thread may reads the variable (its value is $i$),
   \item a second thread reads the variable (its value is still $i$),
@@ -69,5 +69,13 @@
 
 Note that an incrementation operation may never be atomic since it involves both a read and a write operation (sequentially).
 
+\paragraph{Question 2c}
+
+\paragraph{Question 2c} Done (\texttt{main\_td2c.cpp}). When not using a mutex, the inaccuracies observed in question 2a are still observed, which is consisted since we're essentially running the same program. When using a mutex, not such inaccuracies are observed and the final value of the counter is exactly $\texttt{nLoops}\cdot\texttt{nTasks}$. The version using a mutex is much slower than the one without (roughly by a factor of 20 to 30).
+
+We conclude that a mutex allows us to protect the counter (or other ressources) from concurrent accesses, at the cost of decreased performance.
+
+\section*{TD3}
+\paragraph{Question 3a}
 
 \end{document}
