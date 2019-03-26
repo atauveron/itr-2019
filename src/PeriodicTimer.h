@@ -13,8 +13,8 @@
  */
 class PeriodicTimer : public Timer {
 
-public:
-	void start(double duration_ms);
+  public:
+    void start(double duration_ms);
 };
 
 #endif

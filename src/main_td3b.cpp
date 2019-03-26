@@ -1,12 +1,17 @@
 #include "Countdown.h"
-
+#include <iostream>
 #include <unistd.h>
 
 int main() {
-	Countdown countdown(10);
-	countdown.start(1000);
+    Countdown countdown(10);
+    countdown.start(100);
 
-	sleep(20000);
+    std::cout << "start" << std::endl;
+    for (int i; i < 1000000; i++) {
+        sleep(1000);
+    }
 
-	return 0;
+    std::cout << "stop" << std::endl;
+
+    return 0;
 }
