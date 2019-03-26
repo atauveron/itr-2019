@@ -19,7 +19,8 @@ Mutex::~Mutex() {
 void Mutex::lock() { pthread_mutex_lock(&posixId); }
 
 bool Mutex::lock(double timeout_ms) {
-	const timespec tspec(timespec_from_ms(timeout_ms));
+	// Warning: the timespec structure passed must be an absolute time.
+	const timespec tspec(timespec_now() + timespec_from_ms(timeout_ms));
 	return !(bool)pthread_mutex_timedlock(&posixId, &tspec);
 }
 
@@ -32,8 +33,6 @@ Mutex::Lock::Lock(Mutex &m) : mtx(m) { mtx.lock(); }
 Mutex::Lock::Lock(Mutex &m, double timeout_ms) : mtx(m) {
 	int retval = mtx.lock(timeout_ms);
 	if (retval != 0) {
-		// TODO create Timeout Exception
-		// Done
 		throw Mutex::Lock::TimeoutException();
 	}
 }
@@ -43,7 +42,8 @@ Mutex::Lock::~Lock() { mtx.unlock(); }
 void Mutex::Lock::wait() { pthread_cond_wait(&mtx.posixCondId, &mtx.posixId); }
 
 bool Mutex::Lock::wait(double timeout_ms) {
-	const timespec tspec(timespec_from_ms(timeout_ms));
+	// Warning: the timespec structure passed must be an absolute time.
+	const timespec tspec(timespec_now() + timespec_from_ms(timeout_ms));
 	return !(bool)pthread_cond_timedwait(&mtx.posixCondId, &mtx.posixId, &tspec);
 }
 

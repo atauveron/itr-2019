@@ -9,7 +9,10 @@ void Semaphore::give() {
 	if (counter < maxCounter) {
 		++counter;
 	}
+	lck.notify();
 }
+
+Semaphore::~Semaphore() {}
 
 void Semaphore::take() {
 	Mutex::Lock lck(mtx);
