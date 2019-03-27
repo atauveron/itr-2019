@@ -4,14 +4,15 @@
 #include <iostream>
 
 int main() {
-    Calibrator callibrator(1000, 2);
+    Calibrator callibrator(1000, 10);
     CpuLoop loop(callibrator);
 
+    std::cout << "Running for 10 sec" << std::endl;
     Chrono chrono;
     loop.runTime(10000);
     chrono.stop();
 
-    std::cout << chrono.lap() << std::endl;
+    std::cout << "Result in ms: " << chrono.lap() << std::endl;
 
     return 0;
 }
