@@ -14,7 +14,8 @@ _SRC= timespec.cpp \
 	Thread.cpp \
 	Mutex.cpp \
 	Semaphore.cpp \
-	main.cpp
+	main_td4a.cpp \
+	IncrThread.cpp
 _DEP=	timespec.h \
 	Calibrator.h \
 	Chrono.h \
@@ -27,7 +28,8 @@ _DEP=	timespec.h \
 	Thread.h \
 	Mutex.h \
 	Semaphore.h \
-	Fifo.h
+	Fifo.h \
+	IncrThread.h
 SRC= $(patsubst %,$(SDIR)/%,$(_SRC))
 DEP= $(patsubst %,$(SDIR)/%,$(_DEP))
 
@@ -39,8 +41,8 @@ BDIR=	bin
 _BIN= a.out
 BIN= $(patsubst %,$(BDIR)/%,$(_BIN))
 
-# CMP= g++
-CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
+CMP= g++
+#CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
 OPT= -std=c++11 -g -Wall -Wextra -fbounds-check
 LIB= -lrt -pthread
 
