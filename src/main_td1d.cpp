@@ -27,12 +27,11 @@ struct StopData {
  * @param x Array of y-axis values
  * @param N Size of the arrays
  */
-void regressionError(long int *values, unsigned int *X, unsigned int *Y,
-		     int N) {
-    long int xMean = 0;
-    long int yMean = 0;
-    long int xyError = 0;
-    long int squareXError = 0;
+void regressionError(double *values, unsigned int *X, unsigned int *Y, int N) {
+    double xMean = 0;
+    double yMean = 0;
+    double xyError = 0;
+    double squareXError = 0;
 
     // Compute Mean
     for (int i = 0; i < N; ++i) {
@@ -45,13 +44,13 @@ void regressionError(long int *values, unsigned int *X, unsigned int *Y,
 
     // Compute Mean Square Error and XY Error to deduce slope
     for (int i = 0; i < N; ++i) {
-	xyError += abs((xMean - X[i]) * (yMean - Y[i]));
+	std::cout << xyError << " " << squareXError << std::endl;
+	xyError += (xMean - X[i]) * (yMean - Y[i]);
 	squareXError += (xMean - X[i]) * (xMean - X[i]);
     }
-    std::cout << xyError << " " << squareXError << std::endl;
 
-    long int slope = xyError / squareXError;
-    long int offset = yMean - slope * xMean;
+    double slope = xyError / squareXError;
+    double offset = yMean - slope * xMean;
     values[0] = slope;
     values[1] = offset;
 
@@ -146,7 +145,7 @@ unsigned int run(long int delay_s) {
  * @param params  The coefficients `a` & `b` for the linear relation
  * @param N The number of points wanted
  */
-void calib(long int *params, int N) {
+void calib(double *params, int N) {
 
     unsigned int x[N];
     unsigned int y[N];
@@ -166,13 +165,13 @@ void calib(long int *params, int N) {
 
 int main() {
 
-    long int calib_params[2];
+    double calib_params[2];
 
     // Start calibration
     std::cout << "============== START CALIBRATION ==============" << '\n';
     calib(calib_params, 10);
-    long int a = calib_params[0];
-    long int b = calib_params[1];
+    double a = calib_params[0];
+    double b = calib_params[1];
     std::cout << "l(t)= " << a << " * t + " << b << '\n';
     std::cout << "============== CALIBRATION COMPLETE ==============" << '\n';
 
