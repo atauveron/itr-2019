@@ -15,7 +15,8 @@ _SRC= timespec.cpp \
 	Mutex.cpp \
 	Semaphore.cpp \
 	main_td4a.cpp \
-	IncrThread.cpp
+	IncrThread.cpp \
+	SafeIncrThread.cpp
 _DEP=	timespec.h \
 	Calibrator.h \
 	Chrono.h \
@@ -29,7 +30,8 @@ _DEP=	timespec.h \
 	Mutex.h \
 	Semaphore.h \
 	Fifo.h \
-	IncrThread.h
+	IncrThread.h \
+	SafeIncrThread.h
 SRC= $(patsubst %,$(SDIR)/%,$(_SRC))
 DEP= $(patsubst %,$(SDIR)/%,$(_DEP))
 
