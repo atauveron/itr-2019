@@ -1,17 +1,17 @@
-#include "CpuLoop.h"
-#include "Chrono.h"
 #include "Calibrator.h"
+#include "Chrono.h"
+#include "CpuLoop.h"
 #include <iostream>
 
-int main () {
-  Calibrator callibrator(1000,2);
-  CpuLoop loop(callibrator);
-  
-  Chrono chrono;
-  loop.runTime(10000);
-  chrono.stop();
+int main() {
+    Calibrator callibrator(1000, 2);
+    CpuLoop loop(callibrator);
 
-  std::cout << chrono.lap() << std::endl;
+    Chrono chrono;
+    loop.runTime(10000);
+    chrono.stop();
 
-  return 0;
+    std::cout << callibrator.nLoops(chrono.lap()) << std::endl;
+
+    return 0;
 }
