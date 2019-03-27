@@ -31,7 +31,8 @@ int main(int argc, char **argv) {
     volatile double *counter = 0;
     double mean_exec_time = 0;
 
-    int *policy, *priority;
+    int *policy = 0;
+    int *priority = 0;
 
     // Thread
     std::vector<IncrThread> incrementThreads(

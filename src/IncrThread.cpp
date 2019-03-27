@@ -27,6 +27,18 @@ IncrThread::IncrThread(volatile double *counter, unsigned int nLoops,
     start();
 }
 
+IncrThread::IncrThread(IncrThread const &old) {
+    p_counter = old.p_counter;
+    loops = old.loops;
+    int *policy = 0;
+    int *priority = 0;
+
+    old.getScheduling(policy, priority);
+    setScheduling(*policy, *priority);
+}
+
+IncrThread::~IncrThread() {}
+
 /**
  * @brief A function to increment a counter
  *

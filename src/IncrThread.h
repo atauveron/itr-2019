@@ -32,6 +32,10 @@ class IncrThread : public Thread {
      */
     IncrThread(volatile double *p_counter, unsigned int nLoops,
 	       int schedPolicy);
+
+    IncrThread(IncrThread const &);
+
+    ~IncrThread();
     /**
      * @brief Default destructor
      * It is not required.
