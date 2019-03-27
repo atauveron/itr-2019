@@ -35,6 +35,7 @@ IncrThread::IncrThread(IncrThread const &old) {
 
     old.getScheduling(policy, priority);
     setScheduling(*policy, *priority);
+    start();
 }
 
 IncrThread::~IncrThread() {}

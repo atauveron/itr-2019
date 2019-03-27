@@ -6,9 +6,37 @@
 
 #include "timespec.h"
 
+pthread_t PosixThread::INVALID_PTHREAD_ = 0;
+volatile bool PosixThread::READY_ = false;
+Mutex PosixThread::MUTEX_;
+
+void *PosixThread::dummyFunction(void *) {
+    Mutex::Lock l(PosixThread::MUTEX_);
+    PosixThread::READY_ = true;
+    l.notify();
+    return nullptr;
+}
+
+pthread_t PosixThread::INVALID_PTHREAD() {
+    Mutex::Lock l(PosixThread::MUTEX_);
+
+    if (INVALID_PTHREAD_ == 0) {
+	pthread_create(&INVALID_PTHREAD_, nullptr, dummyFunction, nullptr);
+	while (!PosixThread::READY_) {
+	    l.wait();
+	    // HACK: make sure the dummy thread has finished
+	    timespec_wait(timespec_from_ms(10));
+	}
+    }
+
+    return INVALID_PTHREAD_;
+}
+
 PosixThread::PosixThread() {
     pthread_attr_init(&posixAttr);
     pthread_attr_setinheritsched(&posixAttr, PTHREAD_EXPLICIT_SCHED);
+
+    posixId = INVALID_PTHREAD();
 
     // SCHED_OTHER by default
     pthread_attr_setschedpolicy(&posixAttr, SCHED_OTHER);

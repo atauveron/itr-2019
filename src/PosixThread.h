@@ -3,11 +3,14 @@
  * @brief Implementation of the PosixThread class
  */
 
+// TOFDO UPDATE DOC
 #ifndef POSIX_THREAD_INCLUDED
 #define POSIX_THREAD_INCLUDED
 
 #include <exception>
 #include <pthread.h>
+
+#include "Mutex.h"
 
 /**
  * @brief A class that implements a POSIX Thread
@@ -36,7 +39,14 @@ class PosixThread {
      */
     pthread_attr_t posixAttr;
 
+  private:
+    static pthread_t INVALID_PTHREAD_;
+    volatile static bool READY_;
+    static Mutex MUTEX_;
+
   public:
+    static pthread_t INVALID_PTHREAD();
+    static void *dummyFunction(void *);
     /**
      * @brief Default constructor
      */
