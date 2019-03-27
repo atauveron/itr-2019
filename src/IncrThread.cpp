@@ -24,7 +24,6 @@ IncrThread::IncrThread(volatile double *counter, unsigned int nLoops,
 	sched_priority = 9;
     }
     setScheduling(sched_policy, sched_priority);
-    start();
 }
 
 IncrThread::IncrThread(IncrThread const &old) {
