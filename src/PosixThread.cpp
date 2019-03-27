@@ -27,7 +27,7 @@ PosixThread::PosixThread(pthread_t posixId) : posixId(posixId) {
     int retval = pthread_getschedparam(posixId, &policy, &schedParams);
 
     if (retval == ESRCH) {
-        throw PosixThread::Exception();
+	throw PosixThread::Exception();
     }
 
     pthread_attr_setschedpolicy(&posixAttr, policy);
@@ -58,9 +58,9 @@ bool PosixThread::setScheduling(int schedPolicy, int priority) {
     return !(setPolicy || setSched);
 }
 
-bool PosixThread::getScheduling(int *p_schedPolicy, int *p_priority) {
+bool PosixThread::getScheduling(int *p_schedPolicy, int *p_priority) const {
     bool getPolicy =
-        (bool)pthread_attr_getschedpolicy(&posixAttr, p_schedPolicy);
+	(bool)pthread_attr_getschedpolicy(&posixAttr, p_schedPolicy);
     sched_param schedParams;
     bool getSched = (bool)pthread_attr_getschedparam(&posixAttr, &schedParams);
     *p_priority = schedParams.sched_priority;
