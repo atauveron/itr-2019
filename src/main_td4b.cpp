@@ -39,6 +39,10 @@ int main(int argc, char **argv) {
     std::vector<SafeIncrThread> incrementThreads(
 	nTasks, SafeIncrThread(&counter, nLoops, schedPolicy, &mutex));
 
+    for (auto &thread : incrementThreads) {
+	thread.start();
+    }
+
     incrementThreads[0].getScheduling(&policy, &priority);
 
     std::cout << "Policy: " << policy << std::endl;

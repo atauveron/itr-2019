@@ -38,6 +38,10 @@ int main(int argc, char **argv) {
     std::vector<IncrThread> incrementThreads(
 	nTasks, IncrThread(&counter, nLoops, schedPolicy));
 
+    for (auto &thread : incrementThreads) {
+	thread.start();
+    }
+
     incrementThreads[0].getScheduling(&policy, &priority);
 
     std::cout << "Policy: " << policy << std::endl;

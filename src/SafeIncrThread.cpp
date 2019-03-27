@@ -35,7 +35,6 @@ SafeIncrThread::SafeIncrThread(SafeIncrThread const &old) {
 
     old.getScheduling(&policy, &priority);
     setScheduling(policy, priority);
-    start();
 }
 
 SafeIncrThread::~SafeIncrThread() {}
