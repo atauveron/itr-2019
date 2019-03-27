@@ -48,6 +48,7 @@ void regressionError(long int *values, unsigned int *X, unsigned int *Y,
 	xyError += abs((xMean - X[i]) * (yMean - Y[i]));
 	squareXError += (xMean - X[i]) * (xMean - X[i]);
     }
+    std::cout << xyError << " " << squareXError << std::endl;
 
     long int slope = xyError / squareXError;
     long int offset = yMean - slope * xMean;
