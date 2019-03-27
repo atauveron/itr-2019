@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 
     std::cout << "Mean Execution time: " << mean_exec_time / 1000 << "s"
 	      << std::endl;
-    std::cout << "Counter: " << *counter << std::endl;
+    std::cout << "Counter: " << counter << std::endl;
 
     // Return
     return 0;

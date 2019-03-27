@@ -41,8 +41,8 @@ BDIR=	bin
 _BIN= a.out
 BIN= $(patsubst %,$(BDIR)/%,$(_BIN))
 
-CMP= g++
-#CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
+#CMP= g++
+CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
 OPT= -std=c++11 -g -Wall -Wextra -fbounds-check
 LIB= -lrt -pthread
 
