@@ -7,7 +7,8 @@ int main() {
     countdown.start(100);
 
     std::cout << "start" << std::endl;
-    while (countdown.counter > -10) {
+    while (countdown.counter > 0) {
+	// Wait for the Timer to finish
     }
 
     std::cout << "stop" << std::endl;
