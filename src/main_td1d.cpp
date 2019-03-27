@@ -27,7 +27,7 @@ struct StopData {
  * @param x Array of y-axis values
  * @param N Size of the arrays
  */
-void regressionError(double *values, unsigned int *X, unsigned int *Y, int N) {
+void regressionError(double *values, double *X, double *Y, int N) {
     double xMean = 0;
     double yMean = 0;
     double xyError = 0;
@@ -80,8 +80,8 @@ void handler(int, siginfo_t *si, void *) {
  * @param[in] pStop a boolean to stop the function early
  * @return the number of loops performed
  */
-unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
-    unsigned int i;
+double incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
+    double i;
     for (i = 0; i < nLoops; ++i) {
 	if (*pStop) {
 	    break;
@@ -97,7 +97,7 @@ unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
  * @param delay_s the duration for which to run `incr` (in seconds)
  * @return the number of loops performed by `incr`
  */
-unsigned int run(long int delay_s) {
+double run(long int delay_s) {
     unsigned int nLoops(UINT_MAX);
     double counter(0);
     StopData stop{false};
@@ -147,8 +147,8 @@ unsigned int run(long int delay_s) {
  */
 void calib(double *params, int N) {
 
-    unsigned int x[N];
-    unsigned int y[N];
+    double x[N];
+    double y[N];
 
     // Run for a N test
     for (int i = 1; i <= N; ++i) {
