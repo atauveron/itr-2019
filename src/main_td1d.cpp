@@ -129,8 +129,8 @@ double run(long int delay_s) {
 
     // DEBUG
     std::cout << "Execution time: " << timespec_to_ms(end_ts - start_ts)
-	      << "ms (requested " << delay_s << "s)\n";
-    std::cout << "Number of loops: " << nLoops << '\n';
+	      << "ms (requested " << delay_s << "s)" << std::endl;
+    std::cout << "Number of loops: " << nLoops << std::endl;
     // Delete timer
     timer_delete(tid);
 
@@ -168,18 +168,23 @@ int main() {
     double calib_params[2];
 
     // Start calibration
-    std::cout << "============== START CALIBRATION ==============" << '\n';
+    std::cout << "\n ============== START CALIBRATION ============== \n"
+	      << std::endl;
     calib(calib_params, 10);
     double a = calib_params[0];
     double b = calib_params[1];
-    std::cout << "l(t)= " << a << " * t + " << b << '\n';
-    std::cout << "============== CALIBRATION COMPLETE ==============" << '\n';
+    std::cout << "l(t)= " << a << " * t + " << b << std::endl;
+    std::cout << "\n ============== CALIBRATION COMPLETE ============== \n"
+	      << std::endl;
 
     // Check if it is correct
-    std::cout << "============== CHECK CALIBRATION ==============" << '\n';
-    unsigned int nLoopTest = run(10);
-    std::cout << "Expected Loop number: " << 10 * a + b << '\n';
-    std::cout << "Actual Loop number: " << nLoopTest << '\n';
+    std::cout << "\n ============== CHECK CALIBRATION ============== \n"
+	      << std::endl;
+    double nLoopTest = run(10);
+
+    std::cout << "\n\n Résultat:" << std::endl;
+    std::cout << "Expected Loop number: " << 10 * a + b << std::endl;
+    std::cout << "Actual Loop number: " << nLoopTest << std::endl;
 
     // Return
     return 0;
