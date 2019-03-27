@@ -12,25 +12,25 @@
  * @brief A class that implements a countdown
  */
 class Countdown : public PeriodicTimer {
-private:
-	/**
-	 * @brief The counter for countdown
-	 */
-	int counter;
+  public:
+    /**
+     * @brief The counter for countdown
+     */
+    int counter;
 
-public:
-	/**
-	 * @brief Constructor
-	 * 
-	 * @param n the initial value of the counter
-	 */
-	Countdown(int n);
+  public:
+    /**
+     * @brief Constructor
+     *
+     * @param n the initial value of the counter
+     */
+    Countdown(int n);
 
-protected:
-	/**
-	 * @brief The callback for the underlying timer
-	 */
-	void callback();
+  protected:
+    /**
+     * @brief The callback for the underlying timer
+     */
+    void callback();
 };
 
 #endif

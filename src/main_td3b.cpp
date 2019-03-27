@@ -7,8 +7,7 @@ int main() {
     countdown.start(100);
 
     std::cout << "start" << std::endl;
-    for (int i; i < 1000000; i++) {
-        sleep(1000);
+    while (countdown.counter > -10) {
     }
 
     std::cout << "stop" << std::endl;
