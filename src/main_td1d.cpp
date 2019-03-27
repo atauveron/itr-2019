@@ -14,12 +14,12 @@
  * @brief A structure to wrap the data sent to the timer
  */
 struct StopData {
-	/// A boolean indicating whether incrementation of the counter should stop
-	volatile bool stop;
+    /// A boolean indicating whether incrementation of the counter should stop
+    volatile bool stop;
 };
 
 /**
- * @brief A function that performs a linear regression to find 
+ * @brief A function that performs a linear regression to find
  * linear coefficient
  *
  * @param values The slope `a` and the offset `b`
@@ -27,37 +27,36 @@ struct StopData {
  * @param x Array of y-axis values
  * @param N Size of the arrays
  */
-void regressionError(long int* values, unsigned int* X, unsigned int* Y, int N)
-{
-	long int xMean = 0;
-	long int yMean = 0;
-	long int xyError = 0;
-	long int squareXError = 0;
+void regressionError(long int *values, unsigned int *X, unsigned int *Y,
+		     int N) {
+    long int xMean = 0;
+    long int yMean = 0;
+    long int xyError = 0;
+    long int squareXError = 0;
 
-	// Compute Mean
-	for (int i = 0; i < N ; ++i) {
-		xMean += X[i];
-		yMean += Y[i];
-	}
+    // Compute Mean
+    for (int i = 0; i < N; ++i) {
+	xMean += X[i];
+	yMean += Y[i];
+    }
 
-	xMean /= N;
-	yMean /= N;
+    xMean /= N;
+    yMean /= N;
 
-	// Compute Mean Square Error and XY Error to deduce slope
-	for (int i = 0; i < N ; ++i) {
-		xyError += (xMean - X[i]) * (yMean - Y[i]);
-		squareXError += (xMean - X[i]) * (xMean - X[i]);
-	}
+    // Compute Mean Square Error and XY Error to deduce slope
+    for (int i = 0; i < N; ++i) {
+	xyError += abs((xMean - X[i]) * (yMean - Y[i]));
+	squareXError += (xMean - X[i]) * (xMean - X[i]);
+    }
 
-	long int slope = xyError / squareXError;
-	long int offset = yMean - slope * xMean;
-	values[0] = slope;
-	values[1] = offset;
+    long int slope = xyError / squareXError;
+    long int offset = yMean - slope * xMean;
+    values[0] = slope;
+    values[1] = offset;
 
-	// Return
-	return;
+    // Return
+    return;
 }
-
 
 /**
  * @brief A handler function for the timer
@@ -68,9 +67,9 @@ void regressionError(long int* values, unsigned int* X, unsigned int* Y, int N)
  * @param si
  */
 void handler(int, siginfo_t *si, void *) {
-	StopData *stop = reinterpret_cast<StopData *>(si->si_value.sival_ptr);
-	stop->stop = true;
-	return;
+    StopData *stop = reinterpret_cast<StopData *>(si->si_value.sival_ptr);
+    stop->stop = true;
+    return;
 }
 
 /**
@@ -82,14 +81,14 @@ void handler(int, siginfo_t *si, void *) {
  * @return the number of loops performed
  */
 unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
-	unsigned int i;
-	for (i = 0; i < nLoops; ++i) {
-		if (*pStop) {
-			break;
-		}
-		(*pCounter) += 1.0;
+    unsigned int i;
+    for (i = 0; i < nLoops; ++i) {
+	if (*pStop) {
+	    break;
 	}
-	return i;
+	(*pCounter) += 1.0;
+    }
+    return i;
 }
 
 /**
@@ -99,89 +98,89 @@ unsigned incr(unsigned int nLoops, double *pCounter, volatile bool *pStop) {
  * @return the number of loops performed by `incr`
  */
 unsigned int run(long int delay_s) {
-	unsigned int nLoops(UINT_MAX);
-	double counter(0);
-	StopData stop{false};
+    unsigned int nLoops(UINT_MAX);
+    double counter(0);
+    StopData stop{false};
 
-	// Timer
-	struct sigaction sa;
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = handler;
-	sigemptyset(&sa.sa_mask);
-	sigaction(SIGRTMIN, &sa, nullptr);
+    // Timer
+    struct sigaction sa;
+    sa.sa_flags = SA_SIGINFO;
+    sa.sa_sigaction = handler;
+    sigemptyset(&sa.sa_mask);
+    sigaction(SIGRTMIN, &sa, nullptr);
 
-	struct sigevent sev;
-	sev.sigev_notify = SIGEV_SIGNAL;
-	sev.sigev_signo = SIGRTMIN;
-	sev.sigev_value.sival_ptr = &stop;
+    struct sigevent sev;
+    sev.sigev_notify = SIGEV_SIGNAL;
+    sev.sigev_signo = SIGRTMIN;
+    sev.sigev_value.sival_ptr = &stop;
 
-	timer_t tid;
-	timer_create(CLOCK_REALTIME, &sev, &tid);
-	itimerspec its;
-	its.it_value = {delay_s, 0};
-	its.it_interval = {0, 0};
-	timer_settime(tid, 0, &its, nullptr);
+    timer_t tid;
+    timer_create(CLOCK_REALTIME, &sev, &tid);
+    itimerspec its;
+    its.it_value = {delay_s, 0};
+    its.it_interval = {0, 0};
+    timer_settime(tid, 0, &its, nullptr);
 
-	// Increment
-	timespec start_ts, end_ts{};
-	clock_gettime(CLOCK_REALTIME, &start_ts);
-	nLoops = incr(nLoops, &counter, &stop.stop);
-	clock_gettime(CLOCK_REALTIME, &end_ts);
+    // Increment
+    timespec start_ts, end_ts{};
+    clock_gettime(CLOCK_REALTIME, &start_ts);
+    nLoops = incr(nLoops, &counter, &stop.stop);
+    clock_gettime(CLOCK_REALTIME, &end_ts);
 
-	// DEBUG
-	std::cout << "Execution time: " << timespec_to_ms(end_ts - start_ts)
-						<< "ms (requested " << delay_s << "s)\n";
-	std::cout << "Number of loops: " << nLoops << '\n';
-	// Delete timer
-	timer_delete(tid);
+    // DEBUG
+    std::cout << "Execution time: " << timespec_to_ms(end_ts - start_ts)
+	      << "ms (requested " << delay_s << "s)\n";
+    std::cout << "Number of loops: " << nLoops << '\n';
+    // Delete timer
+    timer_delete(tid);
 
-	// Return
-	return nLoops;
+    // Return
+    return nLoops;
 }
 
 /**
- * @brief A function that run several iterations of `run` 
+ * @brief A function that run several iterations of `run`
  * to find the linear coefficient through linear regression
- * 
+ *
  * @param params  The coefficients `a` & `b` for the linear relation
  * @param N The number of points wanted
  */
 void calib(long int *params, int N) {
 
-	unsigned int x[N];
-	unsigned int y[N];
+    unsigned int x[N];
+    unsigned int y[N];
 
-	// Run for a N test
-	for (int i = 1; i <= N; ++i) {
-		x[i] = i;
-		y[i] = run(i);
-	}
+    // Run for a N test
+    for (int i = 1; i <= N; ++i) {
+	x[i] = i;
+	y[i] = run(i);
+    }
 
-	// Compute parameters from Mean Sqaure Error
-	regressionError(params, x, y, N);
+    // Compute parameters from Mean Sqaure Error
+    regressionError(params, x, y, N);
 
-	// Return
-	return;
+    // Return
+    return;
 }
 
 int main() {
 
-	long int calib_params[2];
+    long int calib_params[2];
 
-	// Start calibration
-	std::cout << "============== START CALIBRATION ==============" << '\n';
-	calib(calib_params, 10);
-	long int a = calib_params[0];
-	long int b = calib_params[1];
-	std::cout << "l(t)= " << a << " * t + " << b << '\n';
-	std::cout << "============== CALIBRATION COMPLETE ==============" << '\n';
+    // Start calibration
+    std::cout << "============== START CALIBRATION ==============" << '\n';
+    calib(calib_params, 10);
+    long int a = calib_params[0];
+    long int b = calib_params[1];
+    std::cout << "l(t)= " << a << " * t + " << b << '\n';
+    std::cout << "============== CALIBRATION COMPLETE ==============" << '\n';
 
-	// Check if it is correct
-	std::cout << "============== CHECK CALIBRATION ==============" << '\n';
-	unsigned int nLoopTest = run(10);
-	std::cout << "Expected Loop number: " << 10*a + b << '\n';
-	std::cout << "Actual Loop number: " << nLoopTest << '\n';
+    // Check if it is correct
+    std::cout << "============== CHECK CALIBRATION ==============" << '\n';
+    unsigned int nLoopTest = run(10);
+    std::cout << "Expected Loop number: " << 10 * a + b << '\n';
+    std::cout << "Actual Loop number: " << nLoopTest << '\n';
 
-	// Return
-	return 0;
+    // Return
+    return 0;
 }

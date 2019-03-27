@@ -11,7 +11,7 @@ int main() {
     loop.runTime(10000);
     chrono.stop();
 
-    std::cout << callibrator.nLoops(chrono.lap()) << std::endl;
+    std::cout << chrono.lap() << std::endl;
 
     return 0;
 }
