@@ -182,7 +182,7 @@ int main() {
 	      << std::endl;
     double nLoopTest = run(10);
 
-    std::cout << "\n\n Résultat:" << std::endl;
+    std::cout << "\n\nRésultat:" << std::endl;
     std::cout << "Expected Loop number: " << 10 * a + b << std::endl;
     std::cout << "Actual Loop number: " << nLoopTest << std::endl;
 

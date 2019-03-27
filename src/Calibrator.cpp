@@ -14,7 +14,7 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
 
     looper = nullptr;
 
-    long int values[2];
+    double values[2];
 
     Calibrator::regressionError(values, samples, nSamples, samplingPeriod_ms);
 
@@ -22,12 +22,12 @@ Calibrator::Calibrator(double samplingPeriod_ms, unsigned int nSamples)
     b = values[1];
 }
 
-void Calibrator::regressionError(long int *values, std::vector<double> Y,
+void Calibrator::regressionError(double *values, std::vector<double> Y,
 				 unsigned N, double dx) {
-    long int xMean = dx * (N + 1) / 2;
-    long int yMean = 0;
-    long int xyError = 0;
-    long int squareXError = 0;
+    double xMean = dx * (N + 1) / 2;
+    double yMean = 0;
+    double xyError = 0;
+    double squareXError = 0;
 
     // Compute Mean
     for (unsigned int i = 0; i < N; ++i) {
@@ -38,12 +38,12 @@ void Calibrator::regressionError(long int *values, std::vector<double> Y,
 
     // Compute Mean Square Error and XY Error to deduce slope
     for (unsigned int i = 0; i < N; ++i) {
-	xyError += abs((xMean - (i + 1) * dx) * (yMean - Y[i]));
+	xyError += (xMean - (i + 1) * dx) * (yMean - Y[i]);
 	squareXError += (xMean - (i + 1) * dx) * (xMean - (i + 1) * dx);
     }
 
-    long int slope = xyError / squareXError;
-    long int offset = yMean - slope * xMean;
+    double slope = xyError / squareXError;
+    double offset = yMean - slope * xMean;
     values[0] = slope;
     values[1] = offset;
 
