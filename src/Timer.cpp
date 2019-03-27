@@ -23,6 +23,7 @@ Timer::~Timer() { timer_delete(tid); }
 void Timer::stop() {
     itimerspec its;
     its.it_value = {0, 0};
+    its.it_interval = {0, 0};
     timer_settime(tid, 0, &its, NULL);
 }
 
