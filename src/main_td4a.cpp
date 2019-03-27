@@ -34,11 +34,8 @@ int main(int argc, char **argv) {
     int *policy, *priority;
 
     // Thread
-    std::vector<IncrThread> incrementThreads(nTasks);
-
-    for (auto &thread : incrementThreads) {
-	thread = IncrThread(counter, nLoops, schedPolicy);
-    }
+    std::vector<IncrThread> incrementThreads(
+	nTasks, IncrThread(counter, nLoops, schedPolicy));
 
     incrementThreads[0].getScheduling(policy, priority);
 
@@ -47,7 +44,7 @@ int main(int argc, char **argv) {
 
     for (auto &thread : incrementThreads) {
 	thread.join();
-	mean_exec_time += thread.execTime_ms;
+	mean_exec_time += thread.execTime_ms();
     }
 
     mean_exec_time /= nTasks;
