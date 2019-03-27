@@ -62,10 +62,7 @@ PosixThread::PosixThread(pthread_t posixId) : posixId(posixId) {
     pthread_attr_setschedparam(&posixAttr, &schedParams);
 }
 
-PosixThread::~PosixThread() {
-    join();
-    pthread_attr_destroy(&posixAttr);
-}
+PosixThread::~PosixThread() { pthread_attr_destroy(&posixAttr); }
 
 void PosixThread::start(void *(*threadFunc)(void *), void *threadArg) {
     pthread_create(&posixId, &posixAttr, threadFunc, threadArg);
