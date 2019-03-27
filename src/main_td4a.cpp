@@ -28,19 +28,20 @@ int main(int argc, char **argv) {
 	    schedPolicy = SCHED_FIFO;
 	}
     }
-    double volatile *counter = 0;
+    double volatile counter = 0;
     double mean_exec_time = 0;
 
-    int *policy = 0;
-    int *priority = 0;
+    int policy = 0;
+    int priority = 0;
+
     // Thread
     std::vector<IncrThread> incrementThreads(
-	nTasks, IncrThread(counter, nLoops, schedPolicy));
+	nTasks, IncrThread(&counter, nLoops, schedPolicy));
 
-    incrementThreads[0].getScheduling(policy, priority);
+    incrementThreads[0].getScheduling(&policy, &priority);
 
-    std::cout << "Policy: " << *policy << std::endl;
-    std::cout << "Priority: " << *priority << std::endl;
+    std::cout << "Policy: " << policy << std::endl;
+    std::cout << "Priority: " << priority << std::endl;
 
     for (auto &thread : incrementThreads) {
 	thread.join();

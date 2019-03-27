@@ -30,11 +30,11 @@ IncrThread::IncrThread(volatile double *counter, unsigned int nLoops,
 IncrThread::IncrThread(IncrThread const &old) {
     p_counter = old.p_counter;
     loops = old.loops;
-    int *policy = 0;
-    int *priority = 0;
+    int policy = 0;
+    int priority = 0;
 
-    old.getScheduling(policy, priority);
-    setScheduling(*policy, *priority);
+    old.getScheduling(&policy, &priority);
+    setScheduling(policy, priority);
     start();
 }
 
