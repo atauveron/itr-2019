@@ -76,15 +76,19 @@ Note that an incrementation operation may never be atomic since it involves both
 We conclude that a mutex allows us to protect the counter (or other ressources) from concurrent accesses, at the cost of decreased performance.
 
 \section*{TD3}
-\paragraph{Question 3a}
+\paragraph{Question 3a} The Chrono class can be found in files \texttt{Chrono.h} and \texttt{Chrono.cpp}. A sample main file, which illustrates some functionalities of the class, can be found in \texttt{main\_td3a.cpp}. As far as we can tell by counting seconds on a wrist-watch, it is working fine.
+
+\paragraph{Question 3b}
+
+\paragraph{Question 3c} The Calibrator class can be found in files \texttt{Calibrator.h} and \texttt{Calibrator.cpp}; the CpuLoop class in files \texttt{CpuLoop.h} and \texttt{CpuLoop.cpp}; the Looper class in files \texttt{Looper.h} and \texttt{Looper.cpp}. File \texttt{main\_td3c.cpp} makes the above classes.
 
 \section*{TD4}
-\paragraph{Question 4a} The custom thread class (derived from our \texttt{thread} class) is implemented in \texttt{IncrThread.h} and \texttt{IncrThread.cpp}. The main file is \texttt{main\_td4a.cpp}.
+\paragraph{Question 4a} The custom thread class (derived from our \texttt{thread} class) can be found in files \texttt{IncrThread.h} and \texttt{IncrThread.cpp}. The main file is \texttt{main\_td4a.cpp}.
 
-\paragraph{Question 4b} The custom thread class (derived from our \texttt{thread} class) is implemented in \texttt{SafeIncrThread.h} and \texttt{SafeIncrThread.cpp}. The main file is \texttt{main\_td4b.cpp}.
+\paragraph{Question 4b} The custom thread class (derived from our \texttt{thread} class) can be found in files \texttt{SafeIncrThread.h} and \texttt{SafeIncrThread.cpp}. The main file is \texttt{main\_td4b.cpp}.
 
-\paragraph{Question 4c} The Semaphore class is implemented in files \texttt{Semaphore.h} and \texttt{Semaphore.cpp}. A producer-consumer pattern is implemented in \texttt{main\_td4c.cpp}. Our tests have shown that all produced tokens are consumed.
+\paragraph{Question 4c} The Semaphore class can be found in files \texttt{Semaphore.h} and \texttt{Semaphore.cpp}. A producer-consumer pattern is implemented in \texttt{main\_td4c.cpp}. Our tests have shown that all produced tokens are consumed.
 
-\paragraph{Question 4d} The Fifo template is implemented in file \texttt{Fifo.h} (the use of a template is dictated by the necessity to be able to store any one type of data in the structure). A producer-consumer pattern is implemented in \texttt{main\_td4d.cpp}. Our tests have shown that all produced tokens are consumed.
+\paragraph{Question 4d} The Fifo template can be found in file \texttt{Fifo.h} (the use of a template is dictated by the necessity to be able to store any one type of data in the structure). A producer-consumer pattern is implemented in \texttt{main\_td4d.cpp}. Our tests have shown that all produced tokens are consumed.
 
 \end{document}
