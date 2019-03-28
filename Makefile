@@ -14,7 +14,7 @@ _SRC= timespec.cpp \
 	Thread.cpp \
 	Mutex.cpp \
 	Semaphore.cpp \
-	main_td4a.cpp \
+	main.cpp \
 	IncrThread.cpp \
 	SafeIncrThread.cpp
 _DEP=	timespec.h \
@@ -43,8 +43,8 @@ BDIR=	bin
 _BIN= a.out
 BIN= $(patsubst %,$(BDIR)/%,$(_BIN))
 
-#CMP= g++
-CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
+CMP= g++
+# CMP= ~/ITR/Zed/cross/bin/arm-linux-g++
 OPT= -std=c++11 -g -Wall -Wextra -fbounds-check
 LIB= -lrt -pthread
 
