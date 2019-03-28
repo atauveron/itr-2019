@@ -1,19 +1,21 @@
-#include <iostream>
-
 #include "Calibrator.h"
 #include "Chrono.h"
 #include "CpuLoop.h"
 
-int main() {
-	Calibrator calibrator(1000, 10);
-	CpuLoop loop(calibrator);
+#include <iostream>
 
-	std::cout << "Running for 10 sec" << std::endl;
-	Chrono chrono;
-	loop.runTime(10000);
-	chrono.stop();
+int main()
+{
+		Calibrator callibrator(1000, 10);
+		CpuLoop	loop(callibrator);
 
-	std::cout << "Result in ms: " << chrono.lap() << std::endl;
+		std::cout << "Running for 10 sec" << std::endl;
 
-	return 0;
+		Chrono chrono;
+		loop.runTime(10000);
+		chrono.stop();
+
+		std::cout << "Result in ms: " << chrono.lap() << std::endl;
+
+		return 0;
 }

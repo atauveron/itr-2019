@@ -12,13 +12,29 @@
 /**
  * @brief A class that implements a CPU Loop
  */
-class CpuLoop : public Looper {
-private:
-	Calibrator &calibrator;
+class CpuLoop : public Looper
+{
+	private:
+		/**
+		 * @brief The calibrator used to calibrate the Looper
+		 */
+		Calibrator &calibrator;
 
-public:
-	CpuLoop(Calibrator &calibrator_);
-	void runTime(double duration_ms);
+	public:
+		/**
+		 * @brief Constructor
+		 *
+		 * @param calibrator_ reference to the calibrator used to calibrate the
+		 * Looper
+		 */
+		CpuLoop(Calibrator &calibrator_);
+
+		/**
+		 * @brief Runs a number of loop based on the calibration
+		 *
+		 * @param duration_ms the duration of the runLoop execution
+		 */
+		void runTime(double duration_ms);
 };
 
 #endif

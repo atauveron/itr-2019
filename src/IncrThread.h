@@ -3,51 +3,57 @@
  * @brief Implementation of the IncrThread class for tutorial question 4a
  */
 
-// TODO UPDATE DOC
-
 #ifndef INCR_THREAD_INCLUDED
 #define INCR_THREAD_INCLUDED
 
 #include "Thread.h"
 
 /**
- * @brief A class that increments a counter (derived from our custom Thread
- * class)
+ * @brief A class that implements a Thread that performs
+ * incrementations on a counter
  */
-class IncrThread : public Thread {
+class IncrThread : public Thread
+{
 
-private:
-	/**
-	 * @brief A pointer to the counter to increment
-	 */
-	volatile double *p_counter;
-	/**
-	 * @brief A Chronometer object
-	 */
-	unsigned int loops;
+	private:
+		/**
+		 * @brief A pointer to the counter
+		 */
+		volatile double *p_counter;
 
-public:
-	/**
-	 * @brief Constructor
-	 *
-	 * @param p_counter a pointer to the counter to increment
-	 * @param nLoops the number of loops to perform
-	 * @param schedPolicy the thread's scheduling policy
-	 */
-	IncrThread(volatile double *p_counter, unsigned int nLoops, int schedPolicy);
+		/**
+		 * @brief The number of incrementations to do
+		 */
+		unsigned int loops;
 
-	/**
-	 * @brief Copy constructor
-	 */
-	IncrThread(IncrThread const &);
+	public:
+		/**
+		 * @brief SafeIncrThread Constructor
+		 *
+		 * @param p_counter pointer to the global counter
+		 * @param nLoops number of loops to perform
+		 * @param sched_policy shceduling policy of the process
+		 */
+		IncrThread(volatile double *p_counter, unsigned int nLoops,
+				   int schedPolicy);
 
-	/**
-	 * @brief Default destructor
-	 * It is not required.
-	 */
-	~IncrThread();
+		/**
+		 * @brief The copy constructor
+		 *
+		 * @param other The other Thread that we want to copy
+		 */
+		IncrThread(IncrThread const &other);
 
-	void run();
+		/**
+		 * @brief Default destructor
+		 * It is not required.
+		 */
+		~IncrThread();
+
+		/**
+		 * @brief The increment function
+		 */
+		void run();
 };
 
 #endif

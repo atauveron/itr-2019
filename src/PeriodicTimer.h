@@ -11,10 +11,16 @@
 /**
  * @brief A class that implements a periodic timer
  */
-class PeriodicTimer : public Timer {
+class PeriodicTimer : public Timer
+{
 
-  public:
-    void start(double duration_ms);
+	public:
+		/**
+		 * @brief Start a periodic timer
+		 *
+		 * @param duration_ms The interval of the timer
+		 */
+		void start(double duration_ms);
 };
 
 #endif
