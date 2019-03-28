@@ -16,6 +16,10 @@ _SRC= timespec.cpp \
 	Semaphore.cpp \
 	IncrThread.cpp \
 	SafeIncrThread.cpp \
+	SemaphoreProducerThread.cpp \
+	SemaphoreConsumerThread.cpp \
+	FifoProducerThread.cpp \
+	FifoConsumerThread.cpp
 	main.cpp
 _DEP=	timespec.h \
 	Calibrator.h \
@@ -29,9 +33,13 @@ _DEP=	timespec.h \
 	Thread.h \
 	Mutex.h \
 	Semaphore.h \
-	Fifo.h \
+	Fifo.hpp \
 	IncrThread.h \
-	SafeIncrThread.h
+	SafeIncrThread.h \
+	SemaphoreProducerThread.h \
+	SemaphoreConsumerThread.h \
+	FifoProducerThread.h \
+	FifoConsumerThread.h
 SRC= $(patsubst %,$(SDIR)/%,$(_SRC))
 DEP= $(patsubst %,$(SDIR)/%,$(_DEP))
 

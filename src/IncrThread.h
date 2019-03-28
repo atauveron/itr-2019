@@ -28,7 +28,7 @@ class IncrThread : public Thread
 
 	public:
 		/**
-		 * @brief SafeIncrThread Constructor
+		 * @brief IncrThread Constructor
 		 *
 		 * @param p_counter pointer to the global counter
 		 * @param nLoops number of loops to perform
