@@ -1,6 +1,6 @@
 /**
- * @file Thread.h
- * @brief Implementation of the Thread class
+ * @file IncrThread.h
+ * @brief Implementation of the IncrThread class for tutorial question 4a
  */
 
 // TODO UPDATE DOC
@@ -11,36 +11,43 @@
 #include "Thread.h"
 
 /**
- * @brief A class that implements a Thread
+ * @brief A class that increments a counter (derived from our custom Thread
+ * class)
  */
 class IncrThread : public Thread {
 
-  private:
-    /**
-     * @brief A Chronometer object
-     */
-    volatile double *p_counter;
-    /**
-     * @brief A Chronometer object
-     */
-    unsigned int loops;
+private:
+	/**
+	 * @brief A pointer to the counter to increment
+	 */
+	volatile double *p_counter;
+	/**
+	 * @brief A Chronometer object
+	 */
+	unsigned int loops;
 
-  public:
-    /**
-     * @brief Default constructor
-     * It is not required.
-     */
-    IncrThread(volatile double *p_counter, unsigned int nLoops,
-	       int schedPolicy);
+public:
+	/**
+	 * @brief Constructor
+	 *
+	 * @param p_counter a pointer to the counter to increment
+	 * @param nLoops the number of loops to perform
+	 * @param schedPolicy the thread's scheduling policy
+	 */
+	IncrThread(volatile double *p_counter, unsigned int nLoops, int schedPolicy);
 
-    IncrThread(IncrThread const &);
+	/**
+	 * @brief Copy constructor
+	 */
+	IncrThread(IncrThread const &);
 
-    ~IncrThread();
-    /**
-     * @brief Default destructor
-     * It is not required.
-     */
-    void run();
+	/**
+	 * @brief Default destructor
+	 * It is not required.
+	 */
+	~IncrThread();
+
+	void run();
 };
 
 #endif

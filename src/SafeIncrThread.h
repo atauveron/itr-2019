@@ -1,6 +1,6 @@
 /**
- * @file Thread.h
- * @brief Implementation of the Thread class
+ * @file SafeIncrThread.h
+ * @brief Implementation of the SafeIncrThread class for tutorial question 4a
  */
 
 // TODO UPDATE DOC
@@ -11,37 +11,46 @@
 #include "Thread.h"
 
 /**
- * @brief A class that implements a Thread
+ * @brief A class that increments a thread-safe counter (derived from our custom
+ * Thread class)
  */
 class SafeIncrThread : public Thread {
 
-  private:
-    /**
-     * @brief A Chronometer object
-     */
-    volatile double *p_counter;
-    /**
-     * @brief A Chronometer object
-     */
-    unsigned int loops;
-    Mutex *mutex;
+private:
+	/**
+	 * @brief A pointer to the counter to increment
+	 */
+	volatile double *p_counter;
+	/**
+	 * @brief A Chronometer object
+	 */
+	unsigned int loops;
+	Mutex *mutex;
 
-  public:
-    /**
-     * @brief Default constructor
-     * It is not required.
-     */
-    SafeIncrThread(volatile double *p_counter, unsigned int nLoops,
-		   int schedPolicy, Mutex *mtx);
+public:
+	/**
+	 * @brief Constructor
+	 *
+	 * @param p_counter a pointer to the counter to increment
+	 * @param nLoops the number of loops to perform
+	 * @param schedPolicy the thread's scheduling policy
+	 * @param mtx the mutex to use for thread-safety
+	 */
+	SafeIncrThread(volatile double *p_counter, unsigned int nLoops,
+								 int schedPolicy, Mutex *mtx);
 
-    SafeIncrThread(SafeIncrThread const &);
+	/**
+	 * @brief Copy constructor
+	 */
+	SafeIncrThread(SafeIncrThread const &);
 
-    ~SafeIncrThread();
-    /**
-     * @brief Default destructor
-     * It is not required.
-     */
-    void run();
+	/**
+	 * @brief Default destructor
+	 * It is not required.
+	 */
+	~SafeIncrThread();
+
+	void run();
 };
 
 #endif
