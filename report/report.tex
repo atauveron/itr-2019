@@ -78,4 +78,13 @@ We conclude that a mutex allows us to protect the counter (or other ressources) 
 \section*{TD3}
 \paragraph{Question 3a}
 
+\section*{TD4}
+\paragraph{Question 4a} The custom thread class (derived from our \texttt{thread} class) is implemented in \texttt{IncrThread.h} and \texttt{IncrThread.cpp}. The main file is \texttt{main\_td4a.cpp}.
+
+\paragraph{Question 4b} The custom thread class (derived from our \texttt{thread} class) is implemented in \texttt{SafeIncrThread.h} and \texttt{SafeIncrThread.cpp}. The main file is \texttt{main\_td4b.cpp}.
+
+\paragraph{Question 4c} The Semaphore class is implemented in files \texttt{Semaphore.h} and \texttt{Semaphore.cpp}. A producer-consumer pattern is implemented in \texttt{main\_td4c.cpp}. Our tests have shown that all produced tokens are consumed.
+
+\paragraph{Question 4d} The Fifo template is implemented in file \texttt{Fifo.h} (the use of a template is dictated by the necessity to be able to store any one type of data in the structure). A producer-consumer pattern is implemented in \texttt{main\_td4d.cpp}. Our tests have shown that all produced tokens are consumed.
+
 \end{document}
