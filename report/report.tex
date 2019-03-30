@@ -69,16 +69,30 @@
 
 Note that an incrementation operation may never be atomic since it involves both a read and a write operation (sequentially).
 
-\paragraph{Question 2c}
+\paragraph{Question 2b} Done (\texttt{main\_td2b.cpp}).
 
-\paragraph{Question 2c} Done (\texttt{main\_td2c.cpp}). When not using a mutex, the inaccuracies observed in question 2a are still observed, which is consisted since we're essentially running the same program. When using a mutex, not such inaccuracies are observed and the final value of the counter is exactly $\texttt{nLoops}\cdot\texttt{nTasks}$. The version using a mutex is much slower than the one without (roughly by a factor of 20 to 30).
+\paragraph{Question 2c} Done (\texttt{main\_td2c.cpp}). When not using a mutex, the inaccuracies observed in question 2a are still observed, which is consisted since we're essentially running the same program. When using a mutex, no such inaccuracies are observed and the final value of the counter is exactly $\texttt{nLoops}\cdot\texttt{nTasks}$. The version using a mutex is much slower than the one without (by a factor of roughly 25 for 1,000,000 loops and 50 tasks).
 
 We conclude that a mutex allows us to protect the counter (or other ressources) from concurrent accesses, at the cost of decreased performance.
+
+\textbf{Note.} For this question, \texttt{g++} issues a warning about a missing initialiser for member \texttt{mutex} (of type \texttt{pthread\_mutex\_t}) of structure \texttt{ThreadData}. Since this member must be manually initialised using the POsix function \texttt{pthread\_mutex\_init}, the warning is irrelevant.
 
 \section*{TD3}
 \paragraph{Question 3a} The Chrono class can be found in files \texttt{Chrono.h} and \texttt{Chrono.cpp}. A sample main file, which illustrates some functionalities of the class, can be found in \texttt{main\_td3a.cpp}. As far as we can tell by counting seconds on a wrist-watch, it is working fine.
 
-\paragraph{Question 3b}
+\paragraph{Question 3b} The Timer class can be found in files \texttt{Timer.h} and \texttt{Timer.cpp}; the PeriodicTimer class in files \texttt{PeriodicTimer.h} and \texttt{PeriodicTimer.cpp}.
+
+The constructor, destructor, \texttt{start} and \texttt{stop} methods of the Timer class need be public because the user needs access to these functionalities. The destructor must be virtual since we use inheritance, the \texttt{start} method must also be virtual since derived classes may need to override it.
+
+The \texttt{callback} method of the Timer class must be protected and virtual since we do not want the user to be able to access it and derived classes will need access to override that of the base class (it is not implemented in the base class).
+
+The \texttt{call\_callback} method of the Timer class must be private (since we do not want the user to either be aware of it or use it manually). It must be static since the signature of the handler is determined by the Posix API, and therefore may not be a class method.
+
+The \texttt{tid} attribute of the Timer class must be protected since the user shall not be able to access it and derived classes will need access.
+
+The \texttt{start} method of the PeriodicTimer class is public since it overrides a public method of the base class.
+
+The CountDown class can be found in files \texttt{CountDown.h} and \texttt{CountDown.cpp}, the main file is \texttt{main\_td3b.cpp}.
 
 \paragraph{Question 3c} The Calibrator class can be found in files \texttt{Calibrator.h} and \texttt{Calibrator.cpp}; the CpuLoop class in files \texttt{CpuLoop.h} and \texttt{CpuLoop.cpp}; the Looper class in files \texttt{Looper.h} and \texttt{Looper.cpp}. File \texttt{main\_td3c.cpp} makes the above classes.
 
