@@ -19,9 +19,9 @@ void FifoConsumerThread::run()
 		{
 				try
 				{
-						int			tmp = fifo->pop(1000); // 1 second timeout
+						fifo->pop(1000); // 1 second timeout
 						Mutex::Lock lck(*mutex);
-						consumedTokens++;
+						++consumedTokens;
 				}
 				catch (const Fifo<int>::EmptyException &e)
 				{

@@ -2,13 +2,13 @@
 
 FifoProducerThread::FifoProducerThread(Fifo<int> *  p_fifo,
 									   unsigned int nTokens) :
-	fifo(p_fifo),
-	producedTokens(0), targetTokens(nTokens)
+	fifo(p_fifo), targetTokens(nTokens),
+	producedTokens(0)
 {
 }
 
 FifoProducerThread::FifoProducerThread(FifoProducerThread const &other) :
-	fifo(other.fifo), producedTokens(0), targetTokens(other.targetTokens)
+	fifo(other.fifo), targetTokens(other.targetTokens), producedTokens(0)
 {
 }
 

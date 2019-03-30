@@ -19,7 +19,7 @@ _SRC= timespec.cpp \
 	SemaphoreProducerThread.cpp \
 	SemaphoreConsumerThread.cpp \
 	FifoProducerThread.cpp \
-	FifoConsumerThread.cpp
+	FifoConsumerThread.cpp \
 	main.cpp
 _DEP=	timespec.h \
 	Calibrator.h \

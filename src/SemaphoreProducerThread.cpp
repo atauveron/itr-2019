@@ -2,15 +2,16 @@
 
 SemaphoreProducerThread::SemaphoreProducerThread(Semaphore *  p_semaphore,
 												 unsigned int nTokens) :
-	semaphore(p_semaphore),
-	producedTokens(0), targetTokens(nTokens)
+	semaphore(p_semaphore), targetTokens(nTokens),
+	producedTokens(0)
 {
 }
 
 SemaphoreProducerThread::SemaphoreProducerThread(
 	SemaphoreProducerThread const &other) :
 	semaphore(other.semaphore),
-	producedTokens(0), targetTokens(other.targetTokens)
+	targetTokens(other.targetTokens),
+	producedTokens(0)
 {
 }
 
