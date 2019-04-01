@@ -69,10 +69,10 @@
 
 Note that an incrementation operation may never be atomic since it involves both a read and a write operation (sequentially).
 
-\paragraph{Question 2b} Done (\texttt{main\_td2b.cpp}). The resulting compute time graph is shown as above:
+\paragraph{Question 2b} Done (\texttt{main\_td2b.cpp}). The resulting compute times are presented in the graph below:
 
-\begin{figure}[H]
-  \includegraphic[width=\textwidth]{graph.png}
+\begin{figure}[ht!]
+  \includegraphics[width=\textwidth]{graph.png}
 \end{figure}
 
 \paragraph{Question 2c} Done (\texttt{main\_td2c.cpp}). When not using a mutex, the inaccuracies observed in question 2a are still observed, which is consisted since we're essentially running the same program. When using a mutex, no such inaccuracies are observed and the final value of the counter is exactly $\texttt{nLoops}\cdot\texttt{nTasks}$. The version using a mutex is much slower than the one without (by a factor of roughly 25 for 1,000,000 loops and 50 tasks).
