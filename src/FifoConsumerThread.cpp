@@ -6,7 +6,7 @@ FifoConsumerThread::FifoConsumerThread(Fifo<int> *p_fifo, Mutex *mtx) :
 }
 
 FifoConsumerThread::FifoConsumerThread(FifoConsumerThread const &other) :
-	fifo(other.fifo), consumedTokens(0)
+	fifo(other.fifo), mutex(other.mutex), consumedTokens(0)
 {
 }
 
